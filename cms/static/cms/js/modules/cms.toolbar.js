@@ -699,23 +699,18 @@ var CMS = window.CMS || {};
          */
         _debug: function _debug() {
             var timeout = 1000;
-            // istanbul ignore next: function always reassigned
-            var timer = function () {};
 
-            // bind message event
             var debug = this.ui.container.find('.cms-debug-bar');
 
-            debug.on(this.mouseEnter + ' ' + this.mouseLeave, function (e) {
-                clearTimeout(timer);
+            debug.on(this.mouseEnter + ' ' + this.mouseLeave, CMS.API.Helpers.debounce(function (e) {
+                var shouldShowDebugInfo = e.type === 'mouseenter' || e.type === 'mouseover';
 
-                if (e.type === 'mouseenter') {
-                    timer = setTimeout(function () {
-                        CMS.API.Messages.open({
-                            message: CMS.config.lang.debug
-                        });
-                    }, timeout);
+                if (shouldShowDebugInfo) {
+                    CMS.API.Messages.open({
+                        message: CMS.config.lang.debug
+                    });
                 }
-            });
+            }, timeout));
         },
 
         /**
