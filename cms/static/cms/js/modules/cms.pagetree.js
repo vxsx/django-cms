@@ -17,8 +17,7 @@ var PageTreeStickyHeader = require('./cms.pagetree.stickyheader');
  * The pagetree is loaded via `/admin/cms/page` and has a custom admin
  * templates stored within `templates/admin/cms/page/tree`.
  *
- * @class PageTree
- * @namespace CMS
+ * @class CMS.PageTree
  */
 var PageTree = new Class({
     options: {

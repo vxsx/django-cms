@@ -12,9 +12,8 @@ var SimpleMap = require('./simplemap');
  * checking value vs defaultValue at the time of the actual reload is
  * very unreliable.
  *
- * @class ChangeTracker
- * @namespace CMS
- * @uses CMS.API.Helpers
+ * @class CMS.ChangeTracker
+ * @uses SimpleMap
  */
 var ChangeTracker = new Class({
     initialize: function initialize(iframe) {
@@ -43,11 +42,12 @@ var ChangeTracker = new Class({
     },
 
     /**
-     * Tracks the change made on the field
+     * Tracks the change made on the field.
+     * Event can be `change` or `keydown`.
      *
      * @method _trackChange
      * @private
-     * @param {$.Event} e
+     * @param {$.Event} e event
      */
     _trackChange: function _trackChange(e) {
         var that = this;
@@ -81,7 +81,7 @@ var ChangeTracker = new Class({
     },
 
     /**
-     * @function _getValue
+     * @method _getValue
      * @private
      * @param {Element} target
      * @returns {String|Boolean|void}
@@ -99,7 +99,7 @@ var ChangeTracker = new Class({
     },
 
     /**
-     * @function _getOriginalValue
+     * @method _getOriginalValue
      * @private
      * @param {Element} target
      * @returns {String|Boolean|void}
@@ -137,7 +137,6 @@ var ChangeTracker = new Class({
 
     /**
      * @method isFormChanged
-     * @public
      * @returns {Boolean}
      */
     isFormChanged: function isFormChanged() {

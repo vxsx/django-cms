@@ -16,7 +16,8 @@ var placeholders;
 
 /**
  * TODO make these static methods on CMS.StructureBoard
- * @function actualizeEmptyPlaceholders
+ * @method actualizeEmptyPlaceholders
+ * @member CMS.StructureBoard
  * @private
  */
 function actualizeEmptyPlaceholders() {
@@ -37,7 +38,8 @@ function actualizeEmptyPlaceholders() {
 }
 
 /**
- * @function actualizePluginsCollapsibleStatus
+ * @method actualizePluginsCollapsibleStatus
+ * @member CMS.StructureBoard
  * @private
  * @param {jQuery} els lists of plugins (.cms-draggables)
  */
@@ -57,9 +59,9 @@ function actualizePluginsCollapsibleStatus(els) {
 /**
  * Handles drag & drop, mode switching and collapsables.
  *
- * @class StructureBoard
- * @namespace CMS
+ * @class CMS.StructureBoard
  * @uses CMS.API.Helpers
+ * @mixins CMS.API.Helpers
  */
 var StructureBoard = new Class({
 
@@ -204,7 +206,6 @@ var StructureBoard = new Class({
      * Shows the structureboard. (Structure mode)
      *
      * @method show
-     * @public
      * @param {Boolean} init true if this is first initialization
      * @returns {Boolean|void}
      */

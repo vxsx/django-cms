@@ -9,8 +9,8 @@ var Helpers = require('./cms.base').API.Helpers;
 /**
  * Sticky language headers in pagetree
  *
- * @class PageTreeStickyHeader
- * @namespace CMS
+ * @class CMS.PageTreeStickyHeader
+ * @uses CMS.API.Helpers
  */
 var PageTreeStickyHeader = new Class({
     initialize: function initialize(options) {

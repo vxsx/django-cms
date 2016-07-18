@@ -19,9 +19,9 @@ var DEBUG_BAR_HEIGHT = 5; // TODO has to be fixed
  * together and provides several commonly used API methods such as
  * show/hide, message display or loader indication.
  *
- * @class Toolbar
- * @namespace CMS
+ * @class CMS.Toolbar
  * @uses CMS.API.Helpers
+ * @mixins CMS.API.Helpers
  */
 var Toolbar = new Class({
 
@@ -43,11 +43,11 @@ var Toolbar = new Class({
         this.navigation = new Navigation();
 
         /**
+         * See the {@link CMS.Toolbar#_handleLongMenus}
          * @property {Object} _position
          * @property {Number} _position.top current position of the toolbar
          * @property {Number} _position.top position when toolbar became non-sticky
          * @property {Boolean} _position.isSticky is toolbar sticky?
-         * @see _handleLongMenus
          * @private
          */
         this._position = {
@@ -148,7 +148,8 @@ var Toolbar = new Class({
 
             /**
              * Resets all the hover state classes and events
-             * @function reset
+             * @method reset
+             * @private
              */
             function reset() {
                 open = false;
@@ -369,8 +370,7 @@ var Toolbar = new Class({
      * @private
      * @deprecated this method is deprecated now, it will be removed in > 3.2
      */
-    // eslint-disable-next-line complexity
-    _initialStates: function _initialStates() {
+    _initialStates: function _initialStates() { // eslint-disable-line complexity
         var publishBtn = $('.cms-btn-publish').parent();
 
         // setup toolbar visibility, we need to reverse the options to set the correct state

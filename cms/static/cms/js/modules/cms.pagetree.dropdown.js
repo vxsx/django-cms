@@ -6,14 +6,25 @@ var Class = require('classjs');
  * Have to be delegated, since pagetree nodes can be
  * lazy loaded.
  *
- * @class PageTreeDropdowns
- * @namespace CMS
+ * @class CMS.PageTreeDropdowns
  */
 var PageTreeDropdowns = new Class({
     options: {
+        /**
+         * @cfg {String} dropdownSelector
+         */
         dropdownSelector: '.js-cms-pagetree-dropdown',
+        /**
+         * @cfg {String} triggerSelector
+         */
         triggerSelector: '.js-cms-pagetree-dropdown-trigger',
+        /**
+         * @cfg {String} menuSelector
+         */
         menuSelector: '.js-cms-pagetree-dropdown-menu',
+        /**
+         * @cfg {String} openCls
+         */
         openCls: 'cms-pagetree-dropdown-menu-open'
     },
 
@@ -92,8 +103,9 @@ var PageTreeDropdowns = new Class({
     },
 
     /**
+     * Closes all shown dropdowns.
+     *
      * @method closeAllDropdowns
-     * @public
      */
     closeAllDropdowns: function closeAllDropdowns() {
         $(this.options.dropdownSelector).removeClass(this.options.openCls);

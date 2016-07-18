@@ -10,9 +10,10 @@ var Modal = require('./cms.modal');
 /**
  * Handles copy & paste in the structureboard.
  *
- * @class Clipboard
- * @namespace CMS
+ * @class CMS.Clipboard
+ * @mixins CMS.API.Helpers
  * @uses CMS.API.Helpers
+ * @uses CMS.Modal
  */
 var Clipboard = new Class({
 

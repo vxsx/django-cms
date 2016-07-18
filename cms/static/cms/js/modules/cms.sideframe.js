@@ -12,9 +12,9 @@ var KEYS = require('./cms.base').KEYS;
  * through the toolbar navigation or from plugins. The APIs only allow to
  * open a url within the sideframe.
  *
- * @class Sideframe
- * @namespace CMS
+ * @class CMS.Sideframe
  * @uses CMS.API.Helpers
+ * @mixins CMS.API.Helpers
  */
 var Sideframe = new Class({
 
@@ -200,7 +200,7 @@ var Sideframe = new Class({
          *
          * It is not recommended to expose it and use it on other devices rather than iOS ones.
          *
-         * @function forceRerenderOnIOS
+         * @method forceRerenderOnIOS
          * @private
          */
         function forceRerenderOnIOS() {

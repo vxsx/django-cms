@@ -20,9 +20,10 @@ var clipboardPlugin;
  * Handles adding / moving / copying / pasting / menus etc
  * in structureboard.
  *
- * @class Plugin
- * @namespace CMS
+ * @class CMS.Plugin
  * @uses CMS.API.Helpers
+ * @uses CMS.Modal
+ * @mixins CMS.API.Helpers
  */
 var Plugin = new Class({
 
@@ -394,7 +395,7 @@ var Plugin = new Class({
      *
      * @method copyPlugin
      * @param {Object} [opts=this.options]
-     * @param {String} source_language
+     * @param {String} [source_language]
      * @returns {Boolean|void}
      */
     // eslint-disable-next-line complexity

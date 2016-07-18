@@ -15,9 +15,10 @@ require('./jquery.transition');
  * through the toolbar navigation or from plugins. The APIs allow to
  * open content from a url (iframe) or inject html directly.
  *
- * @class Modal
- * @namespace CMS
+ * @class CMS.Modal
  * @uses CMS.API.Helpers
+ * @uses CMS.ChangeTracker
+ * @mixins CMS.API.Helpers
  */
 var Modal = new Class({
 
@@ -68,7 +69,7 @@ var Modal = new Class({
         var bus = $({});
 
         /**
-         * @function proxy
+         * @method proxy
          * @param {String} name of the method
          * @returns {Function}
          */
@@ -171,7 +172,7 @@ var Modal = new Class({
      * @chainable
      * @param {Object} opts either `opts.url` or `opts.html` are required
      * @param {Object[]} [opts.breadcrumbs] collection of breadcrumb items
-     * @param {String|HTMLNode|jQuery} [opts.html] html markup to render
+     * @param {String|Node|jQuery} [opts.html] html markup to render
      * @param {String} [opts.title] modal window main title (bold)
      * @param {String} [opts.subtitle] modal window secondary title (normal)
      * @param {String} [opts.url] url to render iframe, takes precedence over `opts.html`

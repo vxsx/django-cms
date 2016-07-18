@@ -1,7 +1,3 @@
-/**
- * CMS.API.Helpers
- * Multiple helpers used across all CMS features
- */
 /* eslint-disable indent */
 // will be removed for 3.4
 if (typeof require === 'function') {
@@ -10,23 +6,18 @@ var $ = require('jquery');
 var Class = require('classjs');
 
 /**
- * @module CMS
+ * @class CMS
+ * @singleton
  */
 var CMS = {
     $: $,
     Class: Class,
 
-    /**
-     * @module CMS
-     * @submodule CMS.API
-     */
     API: {},
     /**
      * Provides key codes for common keys.
      *
-     * @module CMS
-     * @submodule CMS.KEYS
-     * @example
+     *     @example
      *     if (e.keyCode === CMS.KEYS.ENTER) { ... };
      */
     KEYS: {
@@ -45,7 +36,7 @@ var CMS = {
 };
 
 /**
- * @function _ns
+ * @method _ns
  * @private
  * @param {String} events space separated event names to be namespaces
  * @returns {String} string containing space separated namespaced event names
@@ -59,11 +50,8 @@ var _ns = function nameSpaceEvent(events) {
 /**
  * Provides various helpers that are mixed in all CMS classes.
  *
- * @class Helpers
- * @static
- * @module CMS
- * @submodule CMS.API
- * @namespace CMS.API
+ * @class CMS.API.Helpers
+ * @singleton
  */
 CMS.API.Helpers = {
 
@@ -81,8 +69,7 @@ CMS.API.Helpers = {
      * @param {String|Number} [data.pk=CMS.config.request.pk]
      * @returns {Boolean|void}
      */
-    // eslint-disable-next-line max-params
-    reloadBrowser: function (url, timeout, ajax, data) {
+    reloadBrowser: function (url, timeout, ajax, data) { // eslint-disable-line max-params
         var that = this;
         // is there a parent window?
         var win = this._getWindow();
@@ -372,8 +359,8 @@ CMS.API.Helpers = {
      * @param {Boolean} [opts.immediate] trigger func immediately?
      * @returns {Function}
      */
-    /* eslint-disable */
     debounce: function debounce(func, wait, opts) {
+        /* eslint-disable */
         var timeout;
         return function () {
             var context = this, args = arguments;
@@ -390,6 +377,7 @@ CMS.API.Helpers = {
                 func.apply(context, args);
             }
         };
+        /* eslint-enable */
     },
 
     /**
@@ -409,6 +397,7 @@ CMS.API.Helpers = {
      * @returns {Function}
      */
     throttle: function throttle(func, wait, opts) {
+        /* eslint-disable */
         var context, args, result;
         var timeout = null;
         var previous = 0;
@@ -449,8 +438,8 @@ CMS.API.Helpers = {
             }
             return result;
         };
+        /* eslint-enable */
     },
-    /* eslint-enable */
 
     /**
      * Browsers allow to "Prevent this page form creating additional

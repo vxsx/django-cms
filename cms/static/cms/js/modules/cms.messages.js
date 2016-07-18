@@ -8,13 +8,18 @@ var Class = require('classjs');
 /**
  * Displays a message underneath the toolbar.
  *
- * @class Messages
- * @namespace CMS
+ * @class CMS.Messages
  */
 var Messages = new Class({
 
     options: {
+        /**
+         * @cfg {Number} messageDuration
+         */
         messageDuration: 300,
+        /**
+         * @cfg {Number} messageDelay
+         */
         messageDelay: 3000
     },
 
@@ -50,7 +55,7 @@ var Messages = new Class({
      *
      * @method open
      * @param {Object} opts
-     * @param {String|HTMLNode} opts.message message to be displayed
+     * @param {String|Node} opts.message message to be displayed
      * @param {String} [opts.dir='center'] direction to be displayed `center` `left` or `right`
      * @param {Number} [opts.delay=this.options.messageDelay] delay until message is closed, 0 leaves it open
      * @param {Boolean} [opts.error] if true sets the style to `.cms-messages-error`

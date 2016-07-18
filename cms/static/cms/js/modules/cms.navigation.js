@@ -9,8 +9,7 @@ var Helpers = require('./cms.base').API.Helpers;
 /**
  * Responsible for creating usable navigation for narrow screens.
  *
- * @class Navigation
- * @namespace CMS
+ * @class CMS.Navigation
  * @uses CMS.API.Helpers
  */
 var Navigation = new Class({

@@ -2,11 +2,6 @@
  * Copyright https://github.com/divio/django-cms
  */
 
-// #############################################################################
-// NAMESPACES
-/**
- * @module CMS
- */
 var CMS = window.CMS || {};
 
 // #############################################################################
@@ -19,8 +14,8 @@ var CMS = window.CMS || {};
         /**
          * Adds internal methods for the creation wizard.
          *
-         * @class Wizards
-         * @namespace CMS
+         * @class CMS.Wizards
+         * @singleton
          */
         CMS.Wizards = {
 

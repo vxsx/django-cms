@@ -12,8 +12,7 @@ var Helpers = require('./cms.base').API.Helpers;
  * The tooltip is the element which shows over plugins
  * and suggests clicking/tapping them to edit.
  *
- * @class Tooltip
- * @namespace CMS
+ * @class CMS.Tooltip
  */
 var Tooltip = new Class({
 
