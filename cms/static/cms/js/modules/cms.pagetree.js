@@ -118,31 +118,35 @@ var PageTree = new Class({
         });
 
         // prepare data
-        if (!this.options.filtered) {
-            data = {
-                url: this.options.urls.tree,
-                cache: false,
-                data: function (node) {
-                    // '#' is rendered if its the root node, there we only
-                    // care about `obj.openNodes`, in the following case
-                    // we are requesting a specific node
+        data = {
+            url: this.options.urls.tree,
+            cache: false,
+            data: function (node) {
+                // '#' is rendered if its the root node, there we only
+                // care about `obj.openNodes`, in the following case
+                // we are requesting a specific node
+                if (!that.options.filtered) {
                     if (node.id === '#') {
                         obj.pageId = null;
                     } else {
                         obj.pageId = that._storeNodeId(node.data.id);
                     }
-
-                    // we need to store the opened items inside the localstorage
-                    // as we have to load the pagetree with the previous opened
-                    // state
-                    obj.openNodes = that._getStoredNodeIds();
-
-                    // we need to set the site id to get the correct tree
-                    obj.site = that.options.site;
-
-                    return obj;
                 }
-            };
+
+                // we need to store the opened items inside the localstorage
+                // as we have to load the pagetree with the previous opened
+                // state
+                obj.openNodes = that._getStoredNodeIds();
+
+                // we need to set the site id to get the correct tree
+                obj.site = that.options.site;
+
+                return obj;
+            }
+        };
+
+        if (that.options.filtered) {
+            data.url = Helpers.makeURL(data.url, ['search=' + $('#field-searchbar').val()]);
         }
 
         // bind options to the jstree instance

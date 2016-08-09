@@ -77,18 +77,40 @@ var PageTreeDropdowns = new Class({
         var triggers = $(this.options.triggerSelector);
         var dropdowns = $(this.options.dropdownSelector);
         var index = triggers.index(trigger);
+        var currentDropdown = dropdowns.eq(index);
 
         // cancel if opened tooltip is triggered again
-        if (dropdowns.eq(index).hasClass(this.options.openCls)) {
+        if (currentDropdown.hasClass(this.options.openCls)) {
             dropdowns.removeClass(this.options.openCls);
             return false;
         }
 
         // otherwise show the dropdown
-        dropdowns
-            .removeClass(this.options.openCls)
-            .eq(index)
-            .addClass(this.options.openCls);
+        dropdowns.removeClass(this.options.openCls);
+        currentDropdown.addClass(this.options.openCls);
+
+        this._loadContent(currentDropdown);
+    },
+
+    /**
+     * @method _loadContent
+     * @private
+     * @param {jQuery} dropdown
+     * @returns {Boolean|$.Deferred} false if not lazy or already loaded or promise
+     */
+    _loadContent: function _loadContent(dropdown) {
+        var data = dropdown.data();
+
+        if (!data.lazyUrl || data.loaded) {
+            return false;
+        }
+
+        $.ajax({
+            url: data.lazyUrl
+        }).done(function (response) {
+            dropdown.find('.js-cms-pagetree-dropdown-menu').html('hello darkness my old friend');
+            dropdown.data('loaded', true);
+        });
     },
 
     /**

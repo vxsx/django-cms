@@ -1,0 +1,72 @@
+<ul class="cms-pagetree-dropdown-menu-inner">
+    {% if has_change_permission %}
+        <li class="js-cms-tree-item-copy"
+            data-id="{{ page.pk }}"
+            data-apphook="{{ page.application_urls|default_if_none:'' }}">
+            <a href="#" title="{% filter escapejs %}{% trans 'Copy' %}{% endfilter %}">
+                <span class="cms-icon cms-icon-copy"></span>
+                <span>{% filter escapejs %}{% trans 'Copy' %}{% endfilter %}<span>
+            </a>
+        </li>
+    {% endif %}
+    {% if has_move_page_permission %}
+        <li class="js-cms-tree-item-cut">
+            <a href="#" title="{% filter escapejs %}{% trans 'Cut' %}{% endfilter %}">
+                <span class="cms-icon cms-icon-scissors"></span>
+                <span>{% filter escapejs %}{% trans 'Cut' %}{% endfilter %}<span>
+            </a>
+        </li>
+    {% endif %}
+    <li>
+        <a href="#" data-id="{{ page.pk }}" class="js-cms-tree-item-paste cms-pagetree-dropdown-item-disabled">
+            <span class="cms-icon cms-icon-alias"></span>
+            <span>{% filter escapejs %}{% trans "Paste" %}{% endfilter %}</span>
+        </a>
+    </li>
+    {% if has_delete_permission %}
+        <li>
+            <a href="{% url 'admin:cms_page_delete' page.id %}?language={{ preview_language }}" title="{% filter escapejs %}{% trans 'Delete' %}{% endfilter %}">
+                <span class="cms-icon cms-icon-bin"></span>
+                <span>{% filter escapejs %}{% trans 'Delete' %}...{% endfilter %}</span>
+            </a>
+        </li>
+    {% endif %}
+    {% if has_change_permission %}
+        <li>
+            <a href="{% url 'admin:cms_page_advanced' page.id %}" title="{% filter escapejs %}{% trans "Advanced settings" %}{% endfilter %}">
+                <span class="cms-icon cms-icon-cogs"></span>
+
+                <span>{% filter escapejs %}{% trans "Advanced settings" %}{% endfilter %}</span>
+            </a>
+        </li>
+    {% endif %}
+    <li class="cms-pagetree-dropdown-separator">&nbsp;</li>
+    <li>
+        {% if page.publication_date %}
+            <p title="{% filter escapejs %}{% trans "publication date" %}{% endfilter %}: {{ page.publication_date|date:"Y-m-d" }}"><strong>{% filter escapejs %}{% trans "publication date" %}{% endfilter %}:</strong> {{ page.publication_date|date:"Y-m-d" }}</p>
+        {% endif %}
+        {% if page.publication_end_date %}
+            <p title="{% filter escapejs %}{% trans "publication end date" %}{% endfilter %}: {{ page.publication_end_date|date:"Y-m-d" }}"><strong>{% filter escapejs %}{% trans "publication end date" %}{% endfilter %}:</strong> {{ page.publication_end_date|date:"Y-m-d" }}</p>
+        {% endif %}
+        <p title="{% filter escapejs %}{% trans "is restricted" %}: {% if page|is_restricted:request %}{% trans "Yes" %}{% else %}{% trans "No" %}{% endif %}{% endfilter %}">
+            <strong>{% filter escapejs %}{% trans "is restricted" %}{% endfilter %}:</strong>
+            {% if page|is_restricted:request %}
+                {% filter escapejs %}{% trans "Yes" %}{% endfilter %}
+            {% else %}
+                {% filter escapejs %}{% trans "No" %}{% endfilter %}
+            {% endif %}
+        </p>
+        {% if page.changed_by %}
+            <p title="{% filter escapejs %}{% trans "last change by" %}{% endfilter %}: {{ page.changed_by }}"><strong>{% filter escapejs %}{% trans "last change by" %}{% endfilter %}:</strong> {{ page.changed_by }}</p>
+        {% endif %}
+        {% if page.get_template_display %}
+            <p title="{% filter escapejs %}{% trans "template" %}{% endfilter %}: {{ page.get_template_display }}"><strong>{% filter escapejs %}{% trans "template" %}{% endfilter %}:</strong> {{ page.get_template_display }}</p>
+        {% endif %}
+        {% if metadata %}
+            <p title="{% filter escapejs %}{% trans "meta" %}{% endfilter %}: {{ metadata }}"><strong>{% filter escapejs %}{% trans "meta" %}{% endfilter %}:</strong> {{ metadata }}</p>
+        {% endif %}
+        {% if page.site %}
+            <p title="{% filter escapejs %}{% trans "site" %}{% endfilter %}: {{ page.site }}"><strong>{% filter escapejs %}{% trans "site" %}{% endfilter %}:</strong> {{ page.site }}</p>
+        {% endif %}
+    </li>
+</ul>
