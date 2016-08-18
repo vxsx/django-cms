@@ -439,8 +439,8 @@
     }
 }
 
-@at-root .cms-dragitem-success {
-    position: absolute;
+@at-root .cms-dragitem-success.cms-dragitem-success {
+    position: absolute !important;
     top: -2px;
     right: -2px;
     bottom: -2px;

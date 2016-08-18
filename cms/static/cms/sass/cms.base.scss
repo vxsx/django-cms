@@ -11,41 +11,44 @@
 //##############################################################################
 // IMPORT COMPONENTS
 @import "components/reset";
-@import "components/general";
-@import "components/animation";
-@import "components/iconography";
-@import "components/hovertooltip";
-@import "components/dialog";
-@import "components/content";
-@import "components/loader";
 
-// div.cms needs to beat .cms-reset a selectors
-div.cms {
-    @import "components/tooltip";
-    @import "components/button";
-    @import "components/toolbar";
-    @import "components/modal";
-    @import "components/sideframe";
-    @import "components/structureboard";
-    @import "components/subnav";
-    @import "components/clipboard";
-    @import "components/pluginpicker";
-    @import "components/shortcuts";
+@context increastSpecificity {
+    @import "components/general";
+    @import "components/animation";
+    @import "components/iconography";
+    @import "components/hovertooltip";
+    @import "components/dialog";
+    @import "components/content";
+    @import "components/loader";
 
-    *:not(.cms-modal):focus {
-        outline: 2px dotted $gray-darker;
-        outline-offset: -3px;
+    // div.cms needs to beat .cms-reset a selectors
+    div.cms.cms-reset {
+        @import "components/tooltip";
+        @import "components/button";
+        @import "components/toolbar";
+        @import "components/modal";
+        @import "components/sideframe";
+        @import "components/structureboard";
+        @import "components/subnav";
+        @import "components/clipboard";
+        @import "components/pluginpicker";
+        @import "components/shortcuts";
 
-        &::-moz-focus-inner {
-            border: 0 !important;
-        }
-        @media screen and (-webkit-min-device-pixel-ratio: 0) {
-            outline: 5px auto -webkit-focus-ring-color;
+        *:not(.cms-modal):focus {
+            outline: 2px dotted $gray-darker;
             outline-offset: -3px;
-        }
 
-        .cms-hover-tooltip {
-            display: none;
+            &::-moz-focus-inner {
+                border: 0 !important;
+            }
+            @media screen and (-webkit-min-device-pixel-ratio: 0) {
+                outline: 5px auto -webkit-focus-ring-color;
+                outline-offset: -3px;
+            }
+
+            .cms-hover-tooltip {
+                display: none;
+            }
         }
     }
 }

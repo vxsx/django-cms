@@ -24,7 +24,6 @@ var bindPlaceholderKeys = function () {
     });
 
     keyboard.bind('enter', function () {
-        keyboard.setContext('plugins');
         var area = $('.cms-dragarea:focus');
         var plugins = area.find('.cms-dragitem');
 
@@ -32,6 +31,7 @@ var bindPlaceholderKeys = function () {
             return;
         }
 
+        keyboard.setContext('plugins');
         plugins.attr('tabindex', '0');
         area.find('.cms-dragitem:first').focus();
         area.trap();

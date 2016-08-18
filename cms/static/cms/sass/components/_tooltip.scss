@@ -36,6 +36,7 @@
         float: right;
         color: $tooltip-second-line-color;
         font-weight: normal;
+        white-space: nowrap;
         padding: 0 nth($tooltip-padding, 2);
         border-radius: $border-radius-base 0 $border-radius-base $border-radius-base;
         background: $gray-darker;

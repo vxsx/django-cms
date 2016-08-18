@@ -17,6 +17,7 @@
 %icon {
     display: inline-block;
     font: normal normal normal 16px/1 <%= fontName %>;
+    font-family: <%= fontName %>;
     text-rendering: auto;
     transform: translate(0, 0);
     -webkit-font-smoothing: antialiased;
@@ -33,6 +34,7 @@
     @return $char;
 }
 
+div.cms .cms-icon,
 .cms-icon {
     @extend %icon;
 }

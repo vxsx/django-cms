@@ -143,6 +143,9 @@
             height: $toolbar-dropdown-item-height;
             padding: $toolbar-dropdown-item-padding;
             cursor: pointer;
+            span {
+                white-space: nowrap;
+            }
         }
         ul ul {
             border-top: 1px solid $gray-lightest;

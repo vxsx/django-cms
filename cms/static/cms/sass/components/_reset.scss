@@ -2,6 +2,458 @@
 // RESET
 
 .cms-reset {
+    a,
+    abbr,
+    acronym,
+    address,
+    applet,
+    article,
+    aside,
+    audio,
+    b,
+    big,
+    blockquote,
+    button,
+    canvas,
+    caption,
+    center,
+    cite,
+    code,
+    dd,
+    del,
+    details,
+    dfn,
+    div,
+    dl,
+    dt,
+    em,
+    fieldset,
+    figcaption,
+    figure,
+    footer,
+    form,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    header,
+    hgroup,
+    i,
+    iframe,
+    img,
+    input,
+    input[type],
+    ins,
+    kbd,
+    label,
+    legend,
+    li,
+    mark,
+    menu,
+    nav,
+    object,
+    ol,
+    p,
+    pre,
+    q,
+    s,
+    samp,
+    section,
+    small,
+    span,
+    strike,
+    strong,
+    sub,
+    summary,
+    sup,
+    table,
+    tbody,
+    td,
+    textarea,
+    tfoot,
+    th,
+    thead,
+    time,
+    tr,
+    tt,
+    u,
+    ul,
+    var,
+    video {
+        font-family: Helvetica,Arial,sans-serif;
+        font-size-adjust: none;
+        font-size: 100%;
+        font-style: normal;
+        letter-spacing: normal;
+        font-stretch: normal;
+        font-variant: normal;
+        font-weight: 400;
+        text-align: left;
+        text-align-last: initial;
+        text-decoration: none;
+        text-emphasis: none;
+        text-height: auto;
+        text-indent: 0;
+        text-justify: auto;
+        text-outline: none;
+        text-shadow: none;
+        text-transform: none;
+        text-wrap: normal;
+        alignment-adjust: auto;
+        alignment-baseline: baseline;
+        animation: none 0 ease 0 1 normal;
+        animation-play-state: running;
+        appearance: normal;
+        azimuth: center;
+        backface-visibility: visible;
+        background: none 0 0 auto repeat scroll padding-box transparent;
+        background-color: transparent;
+        background-image: none;
+        baseline-shift: baseline;
+        binding: none;
+        bleed: 6pt;
+        bookmark-label: content();
+        bookmark-level: none;
+        bookmark-state: open;
+        bookmark-target: none;
+        border: 0 none transparent;
+        border-radius: 0;
+        bottom: auto;
+        box-align: stretch;
+        box-decoration-break: slice;
+        box-direction: normal;
+        box-flex: 0.0;
+        box-flex-group: 1;
+        box-lines: single;
+        box-ordinal-group: 1;
+        box-orient: inline-axis;
+        box-pack: start;
+        box-shadow: none;
+        box-sizing: border-box;
+        break-after: auto;
+        break-before: auto;
+        break-inside: auto;
+        caption-side: top;
+        clear: none;
+        clip: auto;
+        color: inherit;
+        color-profile: auto;
+        column-count: auto;
+        column-fill: balance;
+        column-gap: normal;
+        column-rule: medium medium #1f1f1f;
+        column-span: 1;
+        column-width: auto;
+        columns: auto auto;
+        content: normal;
+        counter-increment: none;
+        counter-reset: none;
+        crop: auto;
+        direction: ltr;
+        display: inline;
+        dominant-baseline: auto;
+        drop-initial-after-adjust: text-after-edge;
+        drop-initial-after-align: baseline;
+        drop-initial-before-adjust: text-before-edge;
+        drop-initial-before-align: caps-height;
+        drop-initial-size: auto;
+        drop-initial-value: initial;
+        elevation: level;
+        empty-cells: show;
+        fit: fill;
+        fit-position: 0 0;
+        float: none;
+        float-offset: 0 0;
+        grid-columns: none;
+        grid-rows: none;
+        hanging-punctuation: none;
+        height: auto;
+        hyphenate-after: auto;
+        hyphenate-before: auto;
+        hyphenate-character: auto;
+        hyphenate-lines: no-limit;
+        hyphenate-resource: none;
+        hyphens: manual;
+        icon: auto;
+        image-orientation: auto;
+        image-rendering: auto;
+        image-resolution: normal;
+        inline-box-align: last;
+        left: auto;
+        line-height: inherit;
+        line-stacking: inline-line-height exclude-ruby consider-shifts;
+        list-style: disc outside none;
+        margin: 0;
+        marks: none;
+        marquee-direction: forward;
+        marquee-loop: 1;
+        marquee-play-count: 1;
+        marquee-speed: normal;
+        marquee-style: scroll;
+        max-height: none;
+        max-width: none;
+        min-height: 0;
+        min-width: 0;
+        move-to: normal;
+        nav-down: auto;
+        nav-index: auto;
+        nav-left: auto;
+        nav-right: auto;
+        nav-up: auto;
+        opacity: 1;
+        orphans: 2;
+        outline: medium none invert;
+        outline-offset: 0;
+        overflow: visible;
+        overflow-style: auto;
+        padding: 0;
+        page: auto;
+        page-break-after: auto;
+        page-break-before: auto;
+        page-break-inside: auto;
+        page-policy: start;
+        perspective: none;
+        perspective-origin: 50% 50%;
+        position: static;
+        presentation-level: 0;
+        punctuation-trim: none;
+        quotes: none;
+        rendering-intent: auto;
+        resize: none;
+        right: auto;
+        rotation: 0;
+        rotation-point: 50% 50%;
+        ruby-align: auto;
+        ruby-overhang: none;
+        ruby-position: before;
+        ruby-span: none;
+        size: auto;
+        string-set: none;
+        table-layout: auto;
+        top: auto;
+        transform: none;
+        transform-origin: 50% 50% 0;
+        transform-style: flat;
+        transition: all 0 ease 0;
+        unicode-bidi: normal;
+        vertical-align: baseline;
+        white-space: normal;
+        white-space-collapse: collapse;
+        widows: 2;
+        width: auto;
+        word-break: normal;
+        word-spacing: normal;
+        word-wrap: normal;
+        z-index: auto;
+        text-align: start;
+    }
+
+    address,
+    article,
+    aside,
+    blockquote,
+    canvas,
+    center,
+    dd,
+    details,
+    dir,
+    div,
+    dl,
+    dt,
+    fieldset,
+    figcaption,
+    figure,
+    footer,
+    form,
+    frame,
+    frameset,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    header,
+    hgroup,
+    hr,
+    menu,
+    nav,
+    noframes,
+    ol,
+    p,
+    pre,
+    section,
+    summary,
+    ul {
+        display: block
+    }
+
+    li {
+        display: list-item
+    }
+
+    table {
+        display: table
+    }
+
+    tr {
+        display: table-row
+    }
+
+    thead {
+        display: table-header-group
+    }
+
+    tbody {
+        display: table-row-group
+    }
+
+    tfoot {
+        display: table-footer-group
+    }
+
+    col {
+        display: table-column
+    }
+
+    colgroup {
+        display: table-column-group
+    }
+
+    td,
+    th {
+        display: table-cell
+    }
+
+    caption {
+        display: table-caption
+    }
+
+    input,
+    select {
+        display: inline-block
+    }
+
+    b,
+    strong {
+        font-weight: 700
+    }
+
+    em,
+    i {
+        font-style: italic
+    }
+
+    b>em,
+    b>i,
+    em>b,
+    em>strong,
+    i>b,
+    i>strong,
+    strong>em,
+    strong>i {
+        font-weight: 700;
+        font-style: italic
+    }
+
+    input,
+    textarea {
+        cursor: text
+    }
+
+    input::-moz-selection,
+    textarea::-moz-selection {
+        background-color: #b3d4fc
+    }
+
+    input::selection,
+    textarea::selection {
+        background-color: #b3d4fc
+    }
+
+    input::-webkit-input-placeholder,
+    textarea::-webkit-input-placeholder {
+        font-family: Helvetica,Arial,sans-serif;
+        font-size-adjust: none;
+        font-size: 100%;
+        font-style: normal;
+        letter-spacing: normal;
+        font-stretch: normal;
+        font-variant: normal;
+        font-weight: 400;
+        text-align: left;
+        text-align-last: initial;
+        text-decoration: none;
+        text-emphasis: none;
+        text-height: auto;
+        text-indent: 0;
+        text-justify: auto;
+        text-outline: none;
+        text-shadow: none;
+        text-transform: none;
+        text-wrap: normal;
+        background-color: inherit;
+        color: inherit
+    }
+
+    input::-moz-placeholder,
+    textarea::-moz-placeholder {
+        font-family: Helvetica,Arial,sans-serif;
+        font-size-adjust: none;
+        font-size: 100%;
+        font-style: normal;
+        letter-spacing: normal;
+        font-stretch: normal;
+        font-variant: normal;
+        font-weight: 400;
+        text-align: left;
+        -moz-text-align-last: initial;
+        text-align-last: initial;
+        text-decoration: none;
+        text-emphasis: none;
+        text-height: auto;
+        text-indent: 0;
+        text-justify: auto;
+        text-outline: none;
+        text-shadow: none;
+        text-transform: none;
+        text-wrap: normal;
+        background-color: inherit;
+        color: inherit
+    }
+
+    input[type=checkbox],
+    input[type=radio] {
+        cursor: default
+    }
+
+    a,
+    a *,
+    a span,
+    button,
+    button *,
+    button span,
+    input[type=reset],
+    input[type=submit] {
+        cursor: pointer
+    }
+
+    a:active,
+    a:hover,
+    a:link,
+    a:visited {
+        color: inherit;
+        background: transparent;
+        text-shadow: none
+    }
+
+    button::-moz-focus-inner {
+        border: 0;
+        padding: 0
+    }
+
     div,
     p,
     a,

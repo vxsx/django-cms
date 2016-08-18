@@ -121,7 +121,6 @@
     display: block;
     color: $gray-darker;
     font-size: $modal-header-title-font-size;
-    font-weight: bold;
     line-height: $modal-header-height;
     min-height: $modal-header-height;
     padding: 0 $padding-large;
@@ -130,8 +129,10 @@
     overflow: hidden;
     text-overflow: ellipsis;
     margin-right: $modal-header-button-area-size * 3 + $padding-normal;
+    .cms-modal-title-prefix {
+        font-weight: bold;
+    }
     .cms-modal-title-suffix {
-        font-weight: normal;
         padding-left: $padding-normal;
     }
 }

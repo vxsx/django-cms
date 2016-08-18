@@ -9,6 +9,8 @@ var plumber = require('gulp-plumber');
 var fs = require('fs');
 var autoprefixer = require('autoprefixer');
 var postcss = require('gulp-postcss');
+var context = require('postcss-plugin-context');
+var increastSpecificity = require('postcss-increase-specificity');
 var gulpif = require('gulp-if');
 var iconfont = require('gulp-iconfont');
 var iconfontCss = require('gulp-iconfont-css');
@@ -120,11 +122,14 @@ gulp.task('sass', function () {
         .pipe(postcss([
             autoprefixer({
                 cascade: false
+            }),
+            context({
+                increastSpecificity: increastSpecificity()
             })
         ]))
-        .pipe(minifyCss({
-            rebase: false
-        }))
+        // .pipe(minifyCss({
+        //     rebase: false
+        // }))
         .pipe(gulpif(options.debug, sourcemaps.write()))
         .pipe(gulp.dest(PROJECT_PATH.css + '/' + CMS_VERSION + '/'));
 });
