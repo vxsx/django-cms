@@ -9,6 +9,8 @@ var plumber = require('gulp-plumber');
 var fs = require('fs');
 var autoprefixer = require('autoprefixer');
 var postcss = require('gulp-postcss');
+var reset = require('postcss-autoreset');
+var initial = require('postcss-initial');
 var gulpif = require('gulp-if');
 var iconfont = require('gulp-iconfont');
 var iconfontCss = require('gulp-iconfont-css');
@@ -104,8 +106,8 @@ var INTEGRATION_TESTS = [
         'disableToolbar',
         'dragndrop',
         'copy-apphook-page',
-        //'history',
-        //'revertLive',
+        // 'history',
+        // 'revertLive',
         'narrowScreen'
     ]
 ];
@@ -125,6 +127,12 @@ gulp.task('sass', function () {
         .pipe(postcss([
             autoprefixer({
                 cascade: false
+            }),
+            reset({
+                reset: 'initial'
+            }),
+            initial({
+                reset: 'all'
             })
         ]))
         .pipe(minifyCss({
