@@ -4,13 +4,13 @@
 
 import $ from 'jquery';
 
-import 'jstree';
-import '../libs/jstree/jstree.grid.min';
-
 import Class from 'classjs';
 import { Helpers, KEYS } from './cms.base';
 import PageTreeDropdowns from './cms.pagetree.dropdown';
 import PageTreeStickyHeader from './cms.pagetree.stickyheader';
+
+import 'jstree';
+import '../libs/jstree/jstree.grid.min';
 
 /**
  * The pagetree is loaded via `/admin/cms/page` and has a custom admin
@@ -352,6 +352,15 @@ var PageTree = new Class({
                     window.location.href = link.data('url');
                 }
             }
+        });
+
+        // when adding new pages - expand nodes as well
+        this.ui.container.on(this.click, '.js-cms-pagetree-add-page', e => {
+            const treeId = this._getNodeId($(e.target));
+
+            const nodeData = this.ui.tree.jstree('get_node', treeId);
+
+            this._storeNodeId(nodeData.data.id);
         });
 
         // add events for error reload (messagelist)
