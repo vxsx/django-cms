@@ -32,6 +32,11 @@
         </div>
 
         <div class="cms-toolbar-right">
+            <div class="cms-toolbar-item cms-toolbar-item-buttons">
+                <a href="javascript: void 0;" class="cms-btn cms-responsive-view">
+                    <span class="cms-icon cms-icon-eye" style="margin-top: 6px;"></span>
+                </a>
+            </div>
             {% for item in cms_toolbar.get_right_items %}
                 {{ item.render }}
             {% endfor %}

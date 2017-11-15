@@ -6697,6 +6697,11 @@
       "resolved": "https://registry.npmjs.org/sprintf-js/-/sprintf-js-1.0.3.tgz",
       "dev": true
     },
+    "srcdoc-polyfill": {
+      "version": "1.0.0",
+      "from": "srcdoc-polyfill@latest",
+      "resolved": "https://registry.npmjs.org/srcdoc-polyfill/-/srcdoc-polyfill-1.0.0.tgz"
+    },
     "sshpk": {
       "version": "1.13.1",
       "from": "sshpk@>=1.7.0 <2.0.0",

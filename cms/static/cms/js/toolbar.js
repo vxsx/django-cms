@@ -23,6 +23,7 @@ import Plugin from './modules/cms.plugins';
 import StructureBoard from './modules/cms.structureboard';
 import Toolbar from './modules/cms.toolbar';
 import Tooltip from './modules/cms.tooltip';
+import ResponsivePreview from './modules/cms.responsivepreview';
 
 // CMS by this time is a global that has `_plugins` property
 CMS.Messages = Messages;
@@ -34,6 +35,7 @@ CMS.Plugin = Plugin;
 CMS.StructureBoard = StructureBoard;
 CMS.Toolbar = Toolbar;
 CMS.Tooltip = Tooltip;
+CMS.ResponsivePreview = ResponsivePreview;
 
 CMS.API = {
     Helpers
