@@ -135,7 +135,8 @@ class ResponsivePreview {
                         $document.find('body').trigger(event);
                     })
                     .find('.cms-plugin').on('click dblclick', e => {
-                        $('.' + e.target.className.split(/\s+/g).join('.')).trigger(e.type);
+                        e.stopPropagation();
+                        $('.' + e.currentTarget.className.split(/\s+/g).join('.')).trigger(e.type);
                     });
             }, 50); // eslint-disable-line no-magic-numbers
         });
