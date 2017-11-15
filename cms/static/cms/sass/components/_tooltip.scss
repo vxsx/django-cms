@@ -41,3 +41,7 @@
         background: $gray-darker;
     }
 }
+
+@at-root .cms-responsive-overflow div.cms .cms-tooltip {
+    z-index: 9999999999999999;
+}
