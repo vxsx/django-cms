@@ -1,8 +1,24 @@
 import $ from 'jquery';
 import { $window } from './cms.base';
+import { isEqual } from 'lodash';
 import measureScrollbar from './scrollbar';
 
 const TRANSITION_TIME = 150;
+
+/**
+ * hasVerticalScrollbar
+ *
+ * @public
+ * @param {HTMLElement} element
+ * @param {Window} [win=window]
+ * @returns {Boolean}
+ */
+function hasVerticalScrollbar (element, win = window) {
+    const style = win.getComputedStyle(element);
+
+    return !!(element.scrollTop || (++element.scrollTop && element.scrollTop--))
+           && style.overflow !== 'hidden' && style['overflow-y'] !== 'hidden' || style['overflow-y'] === 'scroll';
+}
 
 // TODO namespace events
 // TODO when toolbar reloads the button is no longer active
@@ -37,6 +53,7 @@ export default class Resizer {
                     </div>
                 </div>
                 <div class="cms-resizer-container cms-resizer-container-auto">
+                    <div class="cms-resizer-preview"></div>
                     <div class="cms-resizer-wrapper">
                         <div class="cms-resizer-handle cms-resizer-handle-e"></div>
                         <div class="cms-resizer-handle cms-resizer-handle-w"></div>
@@ -54,6 +71,7 @@ export default class Resizer {
             frame,
             resizer: $('.cms-resizer'),
             wrapper: $('.cms-resizer-wrapper'),
+            preview: $('.cms-resizer-preview'),
             container: $('.cms-resizer-container'),
             devices: $('.cms-resizer-device'),
             info: $('.cms-resizer-info')
@@ -82,6 +100,38 @@ export default class Resizer {
             this.changeDevice(data);
         });
 
+        this.ui.devices.on('mouseover', e => {
+            const button = $(e.target).closest('.cms-resizer-device');
+            let data = button.data();
+
+            if (isEqual(this.currentDevice, data)) {
+                data = {
+                    width: data.height,
+                    height: data.width
+                };
+            }
+
+            if (data.width === 'auto') {
+                this.ui.preview.css({
+                    marginTop: -40,
+                    width: '100%',
+                    height: '100%'
+                });
+            } else {
+                this.ui.preview.css({
+                    marginTop: 0,
+                    width: data.width,
+                    height: data.height
+                });
+            }
+        }).on('mouseleave', () => {
+            this.ui.preview.css({
+                marginTop: 0,
+                width: this.currentDevice.width,
+                height: this.currentDevice.height
+            });
+        });
+
         $window.on('resize', () => {
             if (!this.currentDevice) {
                 return;
@@ -92,15 +142,22 @@ export default class Resizer {
 
     changeDevice({ name, width, height }) {
         this.updateInfo({ name, width, height });
+        clearInterval(this.x);
         this.currentDevice = {
             name,
             width,
             height
         };
+        this.ui.wrapper.addClass('cms-resizer-wrapper-transition');
 
         if (width === 'auto') {
             this.ui.container.addClass('cms-resizer-container-auto');
             this.ui.wrapper.css({
+                width: '100%',
+                height: '100%'
+            });
+            this.ui.preview.css({
+                marginTop: -40,
                 width: '100%',
                 height: '100%'
             });
@@ -110,16 +167,30 @@ export default class Resizer {
                 width,
                 height
             });
+            this.ui.preview.css({
+                marginTop: 0,
+                width,
+                height
+            });
 
             // in case there's a scrollbar - account for it
-            setTimeout(() => {
-                const html = this.ui.frame.contentDocument.documentElement;
+            const html = this.ui.frame.contentDocument.documentElement;
+            const win = this.ui.frame.contentWindow;
 
-                if (html.scrollHeight > this.ui.wrapper.height()) {
-                    this.ui.wrapper.css({
-                        width: width + measureScrollbar()
-                    });
-                }
+            setTimeout(() => {
+                this.ui.wrapper.removeClass('cms-resizer-wrapper-transition');
+
+                this.x = setInterval(() => {
+                    if (hasVerticalScrollbar(html, win)) {
+                        this.ui.wrapper.css({
+                            width: width + measureScrollbar()
+                        });
+                    } else {
+                        this.ui.wrapper.css({
+                            width: width
+                        });
+                    }
+                }, 100); // eslint-disable-line
             }, TRANSITION_TIME);
         }
     }
