@@ -3,8 +3,6 @@ import srcDoc from 'srcdoc-polyfill';
 import { $window, $document } from './cms.base';
 import Resizer from './cms.resizer';
 
-// TODO prevent structure board from opening
-
 let markupPromise;
 const getCurrentMarkup = () => {
     var newDoc = new DOMParser().parseFromString(document.documentElement.outerHTML, 'text/html');
@@ -101,8 +99,11 @@ class ResponsivePreview {
         $(frame).on('load', () => {
             setTimeout(() => {
                 $(frame.contentDocument.documentElement)
-                    .on('pointerover pointerout touchstart', '.cms-plugin', e => {
-                        e.stopPropagation();
+                    .on('pointerover.cms pointerout.cms touchstart.cms click.cms dblclick.cms', '.cms-plugin', e => {
+                        e.preventDefault();
+                        if (e.type !== 'click') {
+                            e.stopPropagation();
+                        }
                         var event = new $.Event(e.type);
 
                         if (!e.currentTarget.className) {
@@ -121,6 +122,9 @@ class ResponsivePreview {
 
                         $document.trigger(event);
                     })
+                    // .on('click dblclick', '.cms-plugin', e => {
+                    //     $('.' + e.currentTarget.className.split(/\s+/g).join('.')).trigger(e.type);
+                    // });
                     .find('body')
                     .on('mousemove', e => {
                         var event = new $.Event(e.type);
@@ -133,10 +137,6 @@ class ResponsivePreview {
                         event.pageY = e.clientY + yAdjustment;
 
                         $document.find('body').trigger(event);
-                    })
-                    .find('.cms-plugin').on('click dblclick', e => {
-                        e.stopPropagation();
-                        $('.' + e.currentTarget.className.split(/\s+/g).join('.')).trigger(e.type);
                     });
             }, 50); // eslint-disable-line no-magic-numbers
         });
@@ -150,6 +150,15 @@ class ResponsivePreview {
         return Promise.resolve();
     }
 }
+
+const cancelIfLoadedInsideAnIframe = () => {
+    // FIXME check the window name, no need to break out of all iframes
+    if (window.parent && window.parent !== window) {
+        window.top.location.href = window.location.href;
+    }
+};
+
+cancelIfLoadedInsideAnIframe();
 
 ResponsivePreview.click = 'click.cms.responsive';
 

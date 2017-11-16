@@ -11,7 +11,8 @@ export default class Resizer {
         this._buildUI();
         this._setupUI(frame);
         this._events();
-        this.updateInfo(Resizer.devices[0]);
+        this.currentDevice = Resizer.devices[0];
+        this.updateInfo(this.currentDevice);
     }
 
     _buildUI() {
@@ -82,7 +83,7 @@ export default class Resizer {
         });
 
         $window.on('resize', () => {
-            if (!this.currentDevice || this.currentDevice.width !== 'auto') {
+            if (!this.currentDevice) {
                 return;
             }
             this.updateInfo(this.currentDevice);
@@ -145,14 +146,14 @@ export default class Resizer {
     }
 }
 
-Resizer.devices = [
+Resizer.devices = window._devices || [
     {
         name: 'Auto',
         width: 'auto',
         height: 'auto'
     },
     {
-        name: 'Phone',
+        name: 'iPhone 4',
         width: 320,
         height: 480
     },
@@ -172,8 +173,13 @@ Resizer.devices = [
         height: 736
     },
     {
-        name: 'Tablet',
+        name: 'iPad',
         width: 768,
         height: 1024
+    },
+    {
+        name: 'iPad Pro',
+        width: 1024,
+        height: 1366
     }
 ];
