@@ -13,9 +13,10 @@ const getCurrentMarkup = () => {
         .css('margin-top', '0')
         .removeClass(
             'cms-overflow cms-responsive-overflow ' +
-            'cms-structure-mode-content cms-structure-mode-structure cms-toolbar-expanded cms-ready'
+                'cms-structure-mode-content cms-structure-mode-structure cms-toolbar-expanded cms-ready'
         )
-        .find('#cms-top, [data-cms]').remove();
+        .find('#cms-top, [data-cms]')
+        .remove();
     return Promise.resolve(newDoc.documentElement.outerHTML);
     // TODO reset back to ?edit afterwards
     // return $.ajax({
@@ -72,8 +73,7 @@ class ResponsivePreview {
 
         this.isOpen = true;
         this.ui.trigger.addClass('cms-btn-active');
-        return this._loadMarkup()
-            .then(this._buildUI.bind(this));
+        return this._loadMarkup().then(this._buildUI.bind(this));
     }
 
     _loadMarkup() {
@@ -102,7 +102,9 @@ class ResponsivePreview {
                 frame.contentWindow.name = 'cms-resizer-window';
                 $(frame.contentDocument.documentElement)
                     .on('pointerover.cms pointerout.cms touchstart.cms click.cms dblclick.cms', '.cms-plugin', e => {
-                        e.preventDefault();
+                        if (e.type !== 'click' || !$(e.currentTarget).is('[class*=cms-render-model]')) {
+                            e.preventDefault();
+                        }
                         if (e.type !== 'click') {
                             e.stopPropagation();
                         }
@@ -114,7 +116,6 @@ class ResponsivePreview {
 
                         let xAdjustment = this.resizer.ui.wrapper.offset().left;
                         let yAdjustment = this.resizer.ui.wrapper.offset().top;
-                        // FIXME nested plugins are not highlighted
 
                         event.target = $('.' + e.currentTarget.className.split(/\s+/g).join('.'))[0];
                         event.originalEvent = {
@@ -124,9 +125,6 @@ class ResponsivePreview {
 
                         $document.trigger(event);
                     })
-                    // .on('click dblclick', '.cms-plugin', e => {
-                    //     $('.' + e.currentTarget.className.split(/\s+/g).join('.')).trigger(e.type);
-                    // });
                     .find('body')
                     .on('mousemove', e => {
                         var event = new $.Event(e.type);
