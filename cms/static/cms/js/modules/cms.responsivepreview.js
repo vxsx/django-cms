@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import srcDoc from 'srcdoc-polyfill';
-import { $window, $document } from './cms.base';
+import { $window, $document, KEYS } from './cms.base';
 import Resizer from './cms.resizer';
 import ls from 'local-storage';
 
@@ -15,7 +15,7 @@ const getCurrentMarkup = () => {
             'cms-overflow cms-responsive-overflow ' +
                 'cms-structure-mode-content cms-structure-mode-structure cms-toolbar-expanded cms-ready'
         )
-        .find('#cms-top, [data-cms]')
+        .find('#cms-top, [data-cms], .cms-plugin-overlay')
         .remove();
     return Promise.resolve(newDoc.documentElement.outerHTML);
     // TODO reset back to ?edit afterwards
@@ -100,30 +100,55 @@ class ResponsivePreview {
         $(frame).on('load', () => {
             setTimeout(() => {
                 frame.contentWindow.name = 'cms-resizer-window';
-                $(frame.contentDocument.documentElement)
-                    .on('pointerover.cms pointerout.cms touchstart.cms click.cms dblclick.cms', '.cms-plugin', e => {
-                        if (e.type !== 'click' || !$(e.currentTarget).is('[class*=cms-render-model]')) {
-                            e.preventDefault();
+
+                const frameDoc = $(frame.contentDocument.documentElement);
+
+                frameDoc
+                    .on(
+                        'pointerover.cms mouseover mouseout pointerout.cms touchstart.cms click.cms dblclick.cms',
+                        '.cms-plugin',
+                        e => {
+                            if (e.type !== 'click' || !$(e.currentTarget).is('[class*=cms-render-model]')) {
+                                e.preventDefault();
+                            }
+                            if (e.type !== 'click') {
+                                e.stopPropagation();
+                            }
+                            var event = new $.Event(e.type);
+
+                            if (!e.currentTarget.className) {
+                                return;
+                            }
+
+                            let xAdjustment = this.resizer.ui.wrapper.offset().left;
+                            let yAdjustment = this.resizer.ui.wrapper.offset().top;
+
+                            event.target = $('.' + e.currentTarget.className.split(/\s+/g).join('.'))[0];
+                            event.originalEvent = {
+                                pageX: e.clientX + xAdjustment,
+                                pageY: e.clientY + yAdjustment
+                            };
+
+                            $document.trigger(event);
                         }
-                        if (e.type !== 'click') {
-                            e.stopPropagation();
+                    )
+                    .on('keydown', function(e) {
+                        if (e.keyCode === KEYS.SHIFT) {
+                            $document.data('expandmode', true);
+                            console.log('shift keydown');
+                            try {
+                                frameDoc.find('.cms-plugin:hover').last().trigger('mouseover');
+                                console.log(frameDoc.find('.cms-plugin:hover').last());
+                            } catch (err) {}
                         }
-                        var event = new $.Event(e.type);
-
-                        if (!e.currentTarget.className) {
-                            return;
+                    })
+                    .on('keyup', function(e) {
+                        if (e.keyCode === KEYS.SHIFT) {
+                            $document.data('expandmode', false);
+                            try {
+                                frameDoc.find(':hover').trigger('mouseout');
+                            } catch (err) {}
                         }
-
-                        let xAdjustment = this.resizer.ui.wrapper.offset().left;
-                        let yAdjustment = this.resizer.ui.wrapper.offset().top;
-
-                        event.target = $('.' + e.currentTarget.className.split(/\s+/g).join('.'))[0];
-                        event.originalEvent = {
-                            pageX: e.clientX + xAdjustment,
-                            pageY: e.clientY + yAdjustment
-                        };
-
-                        $document.trigger(event);
                     })
                     .find('body')
                     .on('mousemove', e => {
@@ -137,7 +162,55 @@ class ResponsivePreview {
                         event.pageY = e.clientY + yAdjustment;
 
                         $document.find('body').trigger(event);
+                    })
+                    .find('.cms-plugin:not([class*=cms-render-model])')
+                    .on('mouseover.cms.plugins', e => {
+                        console.log('mouseover');
+                        if (!$document.data('expandmode')) {
+                            return;
+                        }
+                        if (CMS.settings.mode !== 'structure') {
+                            return;
+                        }
+                        e.stopPropagation();
+                        $('.cms-dragitem-success').remove();
+                        $('.cms-draggable-success').removeClass('cms-draggable-success');
+                        CMS.API.StructureBoard._showAndHighlightPlugin(0, true); // eslint-disable-line no-magic-numbers
+                    })
+                    .off('mouseout.cms.plugins')
+                    .on('mouseout.cms.plugins', e => {
+                        console.log('mouseout');
+                        if (CMS.settings.mode !== 'structure') {
+                            return;
+                        }
+                        e.stopPropagation();
+                        const draggable = $('.cms-draggable-success');
+
+                        if (draggable.length) {
+                            draggable.find('.cms-dragitem-success').remove();
+                            draggable.removeClass('cms-draggable-success');
+                        }
+                        // Plugin._removeHighlightPluginContent(this.options.plugin_id);
                     });
+
+                $document.on('keydown.cms.responsive', function(e) {
+                    if (e.keyCode === KEYS.SHIFT) {
+                        $document.data('expandmode', true);
+                        console.log('shift keydown');
+                        try {
+                            frameDoc.find('.cms-plugin:hover').last().trigger('mouseover');
+                            console.log(frameDoc.find('.cms-plugin:hover').last());
+                        } catch (err) {}
+                    }
+                })
+                .on('keyup.cms.responsive', function(e) {
+                    if (e.keyCode === KEYS.SHIFT) {
+                        $document.data('expandmode', false);
+                        try {
+                            frameDoc.find(':hover').trigger('mouseout');
+                        } catch (err) {}
+                    }
+                })
             }, 50); // eslint-disable-line no-magic-numbers
         });
     }
@@ -145,6 +218,7 @@ class ResponsivePreview {
     _destroyUI() {
         this.resizer.destroy();
         this.resizer = null;
+        $document.off('.cms.responsive');
         allowScrolling();
 
         return Promise.resolve();

@@ -244,6 +244,7 @@ export default class Resizer {
     }
 
     destroy() {
+        clearInterval(this.x);
         this.ui.resizer.remove();
     }
 }
