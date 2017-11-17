@@ -135,10 +135,8 @@ class ResponsivePreview {
                     .on('keydown', function(e) {
                         if (e.keyCode === KEYS.SHIFT) {
                             $document.data('expandmode', true);
-                            console.log('shift keydown');
                             try {
                                 frameDoc.find('.cms-plugin:hover').last().trigger('mouseover');
-                                console.log(frameDoc.find('.cms-plugin:hover').last());
                             } catch (err) {}
                         }
                     })
@@ -165,7 +163,6 @@ class ResponsivePreview {
                     })
                     .find('.cms-plugin:not([class*=cms-render-model])')
                     .on('mouseover.cms.plugins', e => {
-                        console.log('mouseover');
                         if (!$document.data('expandmode')) {
                             return;
                         }
@@ -179,7 +176,6 @@ class ResponsivePreview {
                     })
                     .off('mouseout.cms.plugins')
                     .on('mouseout.cms.plugins', e => {
-                        console.log('mouseout');
                         if (CMS.settings.mode !== 'structure') {
                             return;
                         }
@@ -196,10 +192,8 @@ class ResponsivePreview {
                 $document.on('keydown.cms.responsive', function(e) {
                     if (e.keyCode === KEYS.SHIFT) {
                         $document.data('expandmode', true);
-                        console.log('shift keydown');
                         try {
                             frameDoc.find('.cms-plugin:hover').last().trigger('mouseover');
-                            console.log(frameDoc.find('.cms-plugin:hover').last());
                         } catch (err) {}
                     }
                 })
@@ -210,7 +204,7 @@ class ResponsivePreview {
                             frameDoc.find(':hover').trigger('mouseout');
                         } catch (err) {}
                     }
-                })
+                });
             }, 50); // eslint-disable-line no-magic-numbers
         });
     }
