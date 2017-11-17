@@ -15,11 +15,17 @@ const storageKey = 'cms-responsive-viewer';
  * @param {Window} [win=window]
  * @returns {Boolean}
  */
-function hasVerticalScrollbar (element, win = window) {
+function hasVerticalScrollbar(element, win = window) {
     const style = win.getComputedStyle(element);
 
-    return !!(element.scrollTop || (++element.scrollTop && element.scrollTop--))
-           && style.overflow !== 'hidden' && style['overflow-y'] !== 'hidden' || style['overflow-y'] === 'scroll';
+    return (
+        (!!(element.scrollTop || (++element.scrollTop && element.scrollTop--)) &&
+            style.overflow !== 'hidden' &&
+            style['overflow-y'] !== 'hidden') ||
+        element.clientHeight < element.scrollHeight ||
+        style['overflow-y'] === 'scroll' ||
+        style.overflow === 'scroll'
+    );
 }
 
 // TODO namespace events
@@ -39,8 +45,9 @@ export default class Resizer {
             <div class="cms-resizer">
                 <div class="cms-resizer-toolbar">
                     <div class="cms-resizer-devices">
-                        ${Resizer.devices.map((device, i) => {
-                            return `
+                        ${Resizer.devices
+                            .map((device, i) => {
+                                return `
                                 <a href="javascript: void 0;"
                                     class="cms-resizer-device ${i === 0 ? ' cms-resizer-device-active' : ''}"
                                     data-name="${device.name}"
@@ -50,7 +57,8 @@ export default class Resizer {
                                     <span class="cms-resizer-device-name">${device.name}</span>
                                 </a>
                             `;
-                        }).join('\n')}
+                            })
+                            .join('\n')}
                     </div>
                     <div class="cms-resizer-info">
                     </div>
@@ -103,37 +111,39 @@ export default class Resizer {
             this.changeDevice(data);
         });
 
-        this.ui.devices.on('mouseover', e => {
-            const button = $(e.target).closest('.cms-resizer-device');
-            let data = button.data();
+        this.ui.devices
+            .on('mouseover', e => {
+                const button = $(e.target).closest('.cms-resizer-device');
+                let data = button.data();
 
-            if (isEqual(this.currentDevice, data)) {
-                data = {
-                    width: data.height,
-                    height: data.width
-                };
-            }
+                if (isEqual(this.currentDevice, data)) {
+                    data = {
+                        width: data.height,
+                        height: data.width
+                    };
+                }
 
-            if (data.width === 'auto') {
-                this.ui.preview.css({
-                    marginTop: -40,
-                    width: '100%',
-                    height: '100%'
-                });
-            } else {
+                if (data.width === 'auto') {
+                    this.ui.preview.css({
+                        marginTop: -40,
+                        width: '100%',
+                        height: '100%'
+                    });
+                } else {
+                    this.ui.preview.css({
+                        marginTop: 0,
+                        width: data.width,
+                        height: data.height
+                    });
+                }
+            })
+            .on('mouseleave', () => {
                 this.ui.preview.css({
                     marginTop: 0,
-                    width: data.width,
-                    height: data.height
+                    width: this.currentDevice.width,
+                    height: this.currentDevice.height
                 });
-            }
-        }).on('mouseleave', () => {
-            this.ui.preview.css({
-                marginTop: 0,
-                width: this.currentDevice.width,
-                height: this.currentDevice.height
             });
-        });
 
         $window.on('resize', () => {
             if (!this.currentDevice) {
@@ -191,15 +201,14 @@ export default class Resizer {
             }
 
             // in case there's a scrollbar - account for it
-            const html = this.ui.frame.contentDocument.documentElement;
-            const win = this.ui.frame.contentWindow;
-
             setTimeout(() => {
                 this.ui.wrapper.removeClass('cms-resizer-wrapper-transition');
                 let hasCorrectedWidth = false;
 
                 this.x = setInterval(() => {
-                    var hasScrollbar = hasVerticalScrollbar(html, win);
+                    const html = this.ui.frame.contentDocument.documentElement;
+                    const win = this.ui.frame.contentWindow;
+                    const hasScrollbar = hasVerticalScrollbar(html, win);
 
                     if (!hasCorrectedWidth && hasScrollbar) {
                         frame.css({
@@ -213,7 +222,7 @@ export default class Resizer {
                         hasCorrectedWidth = false;
                     }
                 }, 16); // eslint-disable-line
-            }, TRANSITION_TIME);
+            }, TRANSITION_TIME + 10); // eslint-disable-line
         }
     }
 
