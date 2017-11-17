@@ -2216,8 +2216,17 @@ Plugin._highlightPluginContent = function _highlightPluginContent(
     var coordinates = {};
     var positions = [];
     var OVERLAY_POSITION_TO_WINDOW_HEIGHT_RATIO = 0.2;
+    let html = $('html');
+    let win = $window;
 
-    $('.cms-plugin-' + pluginId).each(function() {
+    if (CMS.API.ResponsivePreview && CMS.API.ResponsivePreview.resizer) {
+        try {
+            html = $(CMS.API.ResponsivePreview.resizer.ui.frame.contentDocument.documentElement);
+            win = $(CMS.API.ResponsivePreview.resizer.ui.frame.contentWindow);
+        } catch (e) {}
+    }
+
+    html.find('.cms-plugin-' + pluginId).each(function() {
         var el = $(this);
         var offset = el.offset();
         var ml = parseInt(el.css('margin-left'), 10);
@@ -2248,15 +2257,14 @@ Plugin._highlightPluginContent = function _highlightPluginContent(
 
     // turns out that offset calculation will be off by toolbar height if
     // position is set to "relative" on html element.
-    var html = $('html');
-    var htmlMargin = html.css('position') === 'relative' ? parseInt($('html').css('margin-top'), 10) : 0;
+    var htmlMargin = html.css('position') === 'relative' ? parseInt(html.css('margin-top'), 10) : 0;
 
     coordinates.left = Math.min(...positions.map(pos => pos.x1));
     coordinates.top = Math.min(...positions.map(pos => pos.y1)) - htmlMargin;
     coordinates.width = Math.max(...positions.map(pos => pos.x2)) - coordinates.left;
     coordinates.height = Math.max(...positions.map(pos => pos.y2)) - coordinates.top - htmlMargin;
 
-    $window.scrollTop(coordinates.top - $window.height() * OVERLAY_POSITION_TO_WINDOW_HEIGHT_RATIO);
+    win.scrollTop(coordinates.top - win.height() * OVERLAY_POSITION_TO_WINDOW_HEIGHT_RATIO);
 
     $(
         `
@@ -2276,11 +2284,11 @@ Plugin._highlightPluginContent = function _highlightPluginContent(
         .css({
             zIndex: 9999
         })
-        .appendTo($('body'));
+        .appendTo(html.find('body'));
 
     if (successTimeout) {
         setTimeout(() => {
-            $(`.cms-plugin-overlay-${pluginId}`).fadeOut(successTimeout, function() {
+            html.find(`.cms-plugin-overlay-${pluginId}`).fadeOut(successTimeout, function() {
                 $(this).remove();
             });
         }, delay);
@@ -2298,7 +2306,14 @@ Plugin._clickToHighlightHandler = function _clickToHighlightHandler(e) {
 };
 
 Plugin._removeHighlightPluginContent = function(pluginId) {
-    $(`.cms-plugin-overlay-${pluginId}[data-success-timeout=0]`).remove();
+    let html = $('html');
+
+    if (CMS.API.ResponsivePreview && CMS.API.ResponsivePreview.resizer) {
+        try {
+            html = $(CMS.API.ResponsivePreview.resizer.ui.frame.contentDocument.documentElement);
+        } catch (e) {}
+    }
+    html.find(`.cms-plugin-overlay-${pluginId}[data-success-timeout=0]`).remove();
 };
 
 Plugin.aliasPluginDuplicatesMap = {};
