@@ -2,6 +2,7 @@ import $ from 'jquery';
 import srcDoc from 'srcdoc-polyfill';
 import { $window, $document } from './cms.base';
 import Resizer from './cms.resizer';
+import ls from 'local-storage';
 
 let markupPromise;
 const getCurrentMarkup = () => {
@@ -98,6 +99,7 @@ class ResponsivePreview {
 
         $(frame).on('load', () => {
             setTimeout(() => {
+                frame.contentWindow.name = 'cms-resizer-window';
                 $(frame.contentDocument.documentElement)
                     .on('pointerover.cms pointerout.cms touchstart.cms click.cms dblclick.cms', '.cms-plugin', e => {
                         e.preventDefault();
@@ -152,13 +154,27 @@ class ResponsivePreview {
 }
 
 const cancelIfLoadedInsideAnIframe = () => {
-    // FIXME check the window name, no need to break out of all iframes
-    if (window.parent && window.parent !== window) {
+    if (window.parent && window.parent !== window && window.name === 'cms-resizer-window') {
+        ls.set('cms-responsive-view-activate', 1);
         window.top.location.href = window.location.href;
+        return true;
     }
+    return false;
 };
 
-cancelIfLoadedInsideAnIframe();
+const isCanceling = cancelIfLoadedInsideAnIframe();
+
+if (!isCanceling) {
+    $(() => {
+        if (ls.get('cms-responsive-view-activate')) {
+            ls.remove('cms-responsive-view-activate');
+
+            setTimeout(() => {
+                CMS.API.ResponsivePreview.toggleResponsiveView();
+            });
+        }
+    });
+}
 
 ResponsivePreview.click = 'click.cms.responsive';
 

@@ -2,8 +2,10 @@ import $ from 'jquery';
 import { $window } from './cms.base';
 import { isEqual } from 'lodash';
 import measureScrollbar from './scrollbar';
+import ls from 'local-storage';
 
 const TRANSITION_TIME = 150;
+const storageKey = 'cms-responsive-viewer';
 
 /**
  * hasVerticalScrollbar
@@ -27,8 +29,9 @@ export default class Resizer {
         this._buildUI();
         this._setupUI(frame);
         this._events();
-        this.currentDevice = Resizer.devices[0];
-        this.updateInfo(this.currentDevice);
+        this.currentDevice = ls.get(storageKey) || Resizer.devices[0];
+        this.updateButtons($(`.cms-resizer-device[data-name="${this.currentDevice.name}"]`));
+        this.changeDevice(this.currentDevice);
     }
 
     _buildUI() {
@@ -141,6 +144,7 @@ export default class Resizer {
     }
 
     changeDevice({ name, width, height }) {
+        ls.set(storageKey, { name, width, height });
         this.updateInfo({ name, width, height });
         clearInterval(this.x);
         this.currentDevice = {
@@ -149,6 +153,9 @@ export default class Resizer {
             height
         };
         this.ui.wrapper.addClass('cms-resizer-wrapper-transition');
+
+        const frame = $(this.ui.frame);
+        const scrollbarWidth = measureScrollbar();
 
         if (width === 'auto') {
             this.ui.container.addClass('cms-resizer-container-auto');
@@ -161,6 +168,9 @@ export default class Resizer {
                 width: '100%',
                 height: '100%'
             });
+            frame.css({
+                width: '100%'
+            });
         } else {
             this.ui.container.removeClass('cms-resizer-container-auto');
             this.ui.wrapper.css({
@@ -172,6 +182,13 @@ export default class Resizer {
                 width,
                 height
             });
+            frame.css({
+                width: '100%'
+            });
+
+            if (!scrollbarWidth) {
+                return;
+            }
 
             // in case there's a scrollbar - account for it
             const html = this.ui.frame.contentDocument.documentElement;
@@ -179,18 +196,23 @@ export default class Resizer {
 
             setTimeout(() => {
                 this.ui.wrapper.removeClass('cms-resizer-wrapper-transition');
+                let hasCorrectedWidth = false;
 
                 this.x = setInterval(() => {
-                    if (hasVerticalScrollbar(html, win)) {
-                        this.ui.wrapper.css({
-                            width: width + measureScrollbar()
+                    var hasScrollbar = hasVerticalScrollbar(html, win);
+
+                    if (!hasCorrectedWidth && hasScrollbar) {
+                        frame.css({
+                            width: width + scrollbarWidth
                         });
-                    } else {
-                        this.ui.wrapper.css({
+                        hasCorrectedWidth = true;
+                    } else if (hasCorrectedWidth && !hasScrollbar) {
+                        frame.css({
                             width: width
                         });
+                        hasCorrectedWidth = false;
                     }
-                }, 100); // eslint-disable-line
+                }, 16); // eslint-disable-line
             }, TRANSITION_TIME);
         }
     }
@@ -224,11 +246,6 @@ Resizer.devices = window._devices || [
         height: 'auto'
     },
     {
-        name: 'iPhone 4',
-        width: 320,
-        height: 480
-    },
-    {
         name: 'iPhone 5',
         width: 320,
         height: 568
@@ -252,5 +269,10 @@ Resizer.devices = window._devices || [
         name: 'iPad Pro',
         width: 1024,
         height: 1366
+    },
+    {
+        name: 'Widescreen',
+        width: 1280,
+        height: 800
     }
 ];
