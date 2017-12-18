@@ -915,8 +915,8 @@ class StructureBoard {
                     // now set the correct bounds
                     // istanbul ignore else
                     if (holder.length) {
-                        bounds = holder.data('cms').plugin_restriction;
-                        immediateParentType = holder.data('cms').plugin_type;
+                        bounds = holder.data('cms-placeholder').plugin_restriction;
+                        immediateParentType = holder.data('cms-placeholder').plugin_type;
                     }
                     if (plugin.length) {
                         bounds = plugin.data('cms').plugin_restriction;

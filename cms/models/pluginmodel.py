@@ -276,6 +276,7 @@ class CMSPlugin(six.with_metaclass(PluginModelBase, MP_Node)):
             'placeholder_id': text_type(self.placeholder_id),
             'plugin_name': force_text(plugin_name) or '',
             'plugin_type': self.plugin_type,
+            'allow_children': self.get_plugin_class().allow_children,
             'plugin_id': text_type(self.pk),
             'plugin_language': self.language or '',
             'plugin_parent': text_type(self.parent_id or ''),

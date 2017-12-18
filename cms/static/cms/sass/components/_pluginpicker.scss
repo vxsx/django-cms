@@ -83,13 +83,13 @@
     display: block;
 }
 
-.cms-add-plugin-placeholder {
+@at-root .cms-add-plugin-placeholder {
     position: relative;
     z-index: z(structure, content, empty, addplugin);
-    color: $color-primary;
+    color: $color-primary !important;
     line-height: 44px;
-    padding-left: 20px;
-    border: 2px solid $color-primary;
-    border-radius: $border-radius-base;
-    background-color: mix(white, $color-primary, 90%);
+    padding-left: 20px !important;
+    border: 2px solid $color-primary !important;
+    border-radius: $border-radius-base !important;
+    background-color: mix(white, $color-primary, 90%) !important;
 }

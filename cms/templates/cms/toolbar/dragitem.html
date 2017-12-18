@@ -40,12 +40,6 @@
                 {% render_extra_menu_items plugin %}
             </div>
         </div>
-        {% if not clipboard %}
-            <div class="cms-plugin-picker" data-touch-action="pan-y">
-                <div class="cms-quicksearch"><label><input type="text" placeholder="{% trans 'Filter plugins...' %}" /></label></div>
-                {# plugin child classes here #}
-            </div>
-        {% endif %}
 
         <span class="cms-dragitem-text" title="{{ plugin.plugin_type }} ID: {{ plugin.pk }}"><strong>{{ plugin.get_plugin_name }}</strong> {{ plugin.get_short_description }}</span>
     </div>

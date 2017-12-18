@@ -188,8 +188,12 @@ class ContentRenderer(BaseRenderer):
         '<template class="cms-plugin cms-plugin-end cms-plugin-{pk}"></template>'
     )
     placeholder_edit_template = (
-        '{content} '
-        '<div class="cms-placeholder cms-placeholder-{placeholder_id}"></div> '
+        '<template class="cms-placeholder cms-placeholder-{placeholder_id} cms-placeholder-start"></template>'
+            '{content}'
+        '<template class="cms-placeholder cms-placeholder-{placeholder_id} cms-placeholder-end"></template>'
+        '<script data-cms id="cms-plugin-child-classes-{placeholder_id}" type="text/cms-template">'
+            '{plugin_menu_js}'
+        '</script>'
         '<script data-cms>{plugin_js}\n{placeholder_js}</script>'
     )
 
@@ -307,10 +311,13 @@ class ContentRenderer(BaseRenderer):
         placeholder_toolbar_js = self.get_placeholder_toolbar_js(placeholder, page)
         plugin_toolbar_js_bits = (self.get_plugin_toolbar_js(plugin, page=page)
                                   for plugin in placeholder_cache['plugins'])
+        plugin_menu_js = self.get_placeholder_plugin_menu(placeholder, page=page)
+
         context = {
             'plugin_js': ''.join(plugin_toolbar_js_bits),
             'placeholder_js': placeholder_toolbar_js,
             'placeholder_id': placeholder.pk,
+            'plugin_menu_js': plugin_menu_js,
         }
         return context
 
@@ -645,8 +652,9 @@ class LegacyRenderer(ContentRenderer):
     load_structure = True
     placeholder_edit_template = (
         """
+        <template class="cms-placeholder cms-placeholder-{placeholder_id} cms-placeholder-start"></template>
         {content}
-        <div class="cms-placeholder cms-placeholder-{placeholder_id}"></div>
+        <template class="cms-placeholder cms-placeholder-{placeholder_id} cms-placeholder-end"></template>
         <script data-cms id="cms-plugin-child-classes-{placeholder_id}" type="text/cms-template">
             {plugin_menu_js}
         </script>
