@@ -2290,6 +2290,9 @@ Plugin._refreshPlugins = function refreshPlugins() {
 
     CMS._instances.forEach(instance => {
         if (instance.options.type === 'placeholder') {
+            if (instance.overlay) {
+                instance.overlay.destroy();
+            }
             instance._setupUI(`cms-placeholder-${instance.options.placeholder_id}`);
             instance.ui.container.data('cms-placeholder', instance.options);
             instance._setPlaceholder();
@@ -2298,13 +2301,13 @@ Plugin._refreshPlugins = function refreshPlugins() {
 
     CMS._instances.forEach(instance => {
         if (instance.options.type === 'plugin') {
+            if (instance.overlay) {
+                instance.overlay.destroy();
+            }
             instance._setupUI(`cms-plugin-${instance.options.plugin_id}`);
             instance._ensureData();
             instance.ui.container.data('cms').push(instance.options);
             instance._setPluginContentEvents();
-            if (instance.overlay) {
-                instance.overlay.destroy();
-            }
         }
     });
 

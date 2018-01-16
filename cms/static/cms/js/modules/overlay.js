@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import { uniq, findIndex, isNaN, debounce } from 'lodash';
+import { uniq, findIndex, isNaN, debounce, remove } from 'lodash';
 import { Helpers, $window, uid } from './cms.base';
 
 /**
@@ -44,6 +44,12 @@ export function getOverlayCoordinates(els, { html = $('html'), withMargins = tru
             y2: offset.top + el.outerHeight() + mb
         });
     });
+
+    remove(positions, p => p.x1 === 0 && p.x2 === 0 && p.y1 === 0 && p.y2 === 0);
+
+    if (positions.length === 0) {
+        positions = [{ x1: 0, x2: 0, y1: 0, y2: 0 }];
+    }
 
     // turns out that offset calculation will be off by toolbar height if
     // position is set to "relative" on html element.
@@ -102,8 +108,11 @@ class Overlay {
     }
 
     events() {
-        $window.on(`resize.cms-plugin-overlay-${this.plugin.options.plugin_id}-${this.uid}`, () =>
-            this.updateCoordinates()
+        $window.on(
+            `resize.cms-plugin-overlay-${this.plugin.options.plugin_id}-${this.uid}`,
+            debounce(() => {
+                this.updateCoordinates();
+            })
         );
 
         this.getOrCreateOverlay()
@@ -263,17 +272,20 @@ class Overlay {
     isInBounds(e, htmlMargin) {
         let { width, height, top, left } = this.coordinates;
 
-        return isInsideCoordinates(e, {
-            width,
-            height,
-            left,
-            top: top + htmlMargin
-        }) || isInsideCoordinates(e, {
-            width: this.controlsSize.width,
-            height: this.controlsSize.height,
-            left: this.coordinates.left + this.coordinates.width / 2 - this.controlsSize.width / 2,
-            top: this.coordinates.top + this.coordinates.height + htmlMargin - this.controlsSize.height / 2
-        });
+        return (
+            isInsideCoordinates(e, {
+                width,
+                height,
+                left,
+                top: top + htmlMargin
+            }) ||
+            isInsideCoordinates(e, {
+                width: this.controlsSize.width,
+                height: this.controlsSize.height,
+                left: this.coordinates.left + this.coordinates.width / 2 - this.controlsSize.width / 2,
+                top: this.coordinates.top + this.coordinates.height + htmlMargin - this.controlsSize.height / 2
+            })
+        );
     }
 
     hide() {
@@ -286,6 +298,7 @@ class Overlay {
         this.ui.html.find('body').off(`mousemove.cms-plugin-overlay-${this.plugin.options.plugin_id}-${this.uid}`);
         $window.off(`resize.cms-plugin-overlay-${this.plugin.options.plugin_id}-${this.uid}`);
         this.plugin.overlay = null;
+        this.plugin = null;
     }
 
     static destroyAll() {

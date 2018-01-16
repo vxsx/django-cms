@@ -766,7 +766,7 @@ var Toolbar = new Class({
 
         this._events();
         this.navigation = new Navigation();
-        this.navigation.ui.window.trigger('resize');
+        this.navigation.ui.window.trigger('resize.cms.toolbar.refresh-markup');
 
         CMS.API.Clipboard.ui.triggers = $('.cms-clipboard-trigger a');
         CMS.API.Clipboard.ui.triggerRemove = $('.cms-clipboard-empty a');
