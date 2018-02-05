@@ -1,0 +1,8 @@
+{% load cms_static %}<span class="cms-icon cms-icon-{{ icon }}{% if color %} cms-icon-{{ color }}{% endif %}{% if class %} {{ class }}{% endif %}">
+    <svg role="presentation">
+        <use xlink:href="{% static_with_version "cms/sprites/icons.svg" %}#cms-icon-{{ icon }}"></use>
+    </svg>
+    {% if title %}
+        <span class="cms-sr-only">{{ title }}</span>
+    {% endif %}
+</span>

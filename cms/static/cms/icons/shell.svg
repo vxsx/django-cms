@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>Resources/icons/shell</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M20.9130729,2 L3.08692713,2 C2.48721509,2 2,2.48721502 2,3.08692699 L2,20.913073 C2,21.2007282 2.1146382,21.4777588 2.31844248,21.6815576 C2.52224675,21.8853564 2.79927187,22 3.08692713,22 L20.9130729,22 C21.2007281,22 21.4777587,21.8853618 21.6815575,21.6815576 C21.8853564,21.4777533 22,21.2007282 22,20.913073 L22,3.08692699 C22,2.79927176 21.8853618,2.52224124 21.6815575,2.31844243 C21.4777533,2.11464362 21.2007281,2 20.9130729,2 Z M6,14.6169398 L8.60009113,12.0000123 L6,9.40728372 L7.41127994,8 L10.7049763,11.3083217 C10.8935993,11.4935166 11,11.7471843 11,12.0114944 C11,12.2767429 10.8935968,12.5304352 10.7049763,12.7156301 L7.38726005,16 L6,14.6169398 Z M15,18 L11,18 L11,16 L14.9752851,16 L15,18 Z" id="path-1"></path>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Resources/icons/shell">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <use id="Page-1" fill="#000000" xlink:href="#path-1"></use>
+            <g id="Resources/Colour/black" mask="url(#mask-2)" fill="#000000">
+                <rect id="Rectangle" x="0" y="0" width="24" height="24"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

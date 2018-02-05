@@ -1,18 +1,96 @@
-//##############################################################################
-// BUTTONS
-$pagetree: false !default;
+@function important($important) {
+    @if($important == true) {
+        @return !important;
+    } @else {
+        @return unquote('');
+    }
+}
+@mixin button-variant($color, $background, $border, $important: false) {
+    color: $color important($important);
+    background-color: $background important($important);
+    border: 1px solid $border important($important);
 
-.cms-btn {
-    @include button-variant($btn-default-color, $btn-default-bgcolor, $btn-default-border, $pagetree);
+    > .icon {
+        fill: $color;
+        cursor: inherit;
+        width: 16px;
+        height: 16px;
+    }
+
+    &:focus,
+    &.focus {
+        outline: none;
+        color: $color important($important);
+        background-color: darken($background, 5%) important($important);
+        border-color: darken($border, 5%) important($important);
+        text-decoration: none important($important);
+    }
+    &:hover {
+        color: $color important($important);
+        background-color: darken($background, 5%) important($important);
+        border-color: darken($border, 5%) important($important);
+        text-decoration: none important($important);
+    }
+    &:active,
+    &.btn-active {
+        color: $color important($important);
+        background-color: darken($background, 10%) important($important);
+        border-color: darken($border, 10%) important($important);
+        box-shadow: $btn-active-shadow important($important);
+
+        &:hover,
+        &:focus,
+        &.focus {
+            color: $color important($important);
+            background-color: darken($background, 17%) important($important);
+            border-color: darken($border, 25%) important($important);
+        }
+    }
+    &:active,
+    &.btn-active {
+        background-image: none important($important);
+    }
+    &.btn-disabled,
+    &[disabled] {
+        &,
+        &:hover,
+        &:focus,
+        &.focus,
+        &:active,
+        &.btn-active {
+            background-color: rgba($background, 0.4) important($important);
+            border-color: rgba($border, 0.4) important($important);
+            color: lighten($color, 50%) important(1);
+            cursor: not-allowed;
+            box-shadow: none important($important);
+            &:before {
+                color: rgba($color, 0.4) important(1);
+            }
+        }
+    }
 }
 
-.cms-btn-action {
-    @include button-variant($btn-action-color, $btn-action-bgcolor, $btn-action-border, $pagetree);
-}
-.cms-btn-caution {
-    @include button-variant($btn-caution-color, $btn-caution-bgcolor, $btn-caution-border, $pagetree);
+.btn {
+    display: inline-flex;
+    background-image: none;
+    cursor: pointer;
+    border-radius: $btn-border-radius-base;
+    background-clip: padding-box;
+    -webkit-appearance: none;
 }
 
-.cms-btn-disabled img {
-    opacity: 0.2 !important;
+.btn-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    box-shadow: 0 2px 4px rgba(black, 0.5);
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-action {
+    @include button-variant($btn-action-color, $btn-action-bgcolor, $btn-action-border, false);
+}
+.btn-caution {
+    @include button-variant($btn-caution-color, $btn-caution-bgcolor, $btn-caution-border, false);
 }

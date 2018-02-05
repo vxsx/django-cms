@@ -21,8 +21,11 @@ import Sideframe from './modules/cms.sideframe';
 import Clipboard from './modules/cms.clipboard';
 import Plugin from './modules/cms.plugins';
 import StructureBoard from './modules/cms.structureboard';
-import Toolbar from './modules/cms.toolbar';
 import Tooltip from './modules/cms.tooltip';
+
+
+// NEW
+import initLogin from 'components/login';
 
 // CMS by this time is a global that has `_plugins` property
 CMS.Messages = Messages;
@@ -32,7 +35,7 @@ CMS.Sideframe = Sideframe;
 CMS.Clipboard = Clipboard;
 CMS.Plugin = Plugin;
 CMS.StructureBoard = StructureBoard;
-CMS.Toolbar = Toolbar;
+// CMS.Toolbar = Toolbar;
 CMS.Tooltip = Tooltip;
 
 CMS.API = {
@@ -45,3 +48,7 @@ CMS.Class = Class;
 initHelpShortcuts();
 
 window.CMS = CMS;
+
+
+// NEW
+initLogin();

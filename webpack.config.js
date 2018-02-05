@@ -46,6 +46,7 @@ module.exports = function(opts) {
             })
         ],
         resolve: {
+            modules: [PROJECT_PATH.js, 'node_modules'],
             alias: {
                 jquery: PROJECT_PATH.js + '/libs/jquery.min.js',
                 classjs: PROJECT_PATH.js + '/libs/class.min.js',

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>Resources/icons/triangle-right</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M18.7368321,8.323899 C19.097366,8.7162417 19.0874576,9.32675594 18.7071068,9.70710678 L12.8717412,15.5424723 L12.5,16 L12.4237064,15.9061001 C12.0533367,16.0792595 11.5987148,16.0129284 11.2928932,15.7071068 L5.29289322,9.70710678 C4.90236893,9.31658249 4.90236893,8.68341751 5.29289322,8.29289322 C5.48815536,8.09763107 5.74407768,8 6,8 L19,8 L18.7368321,8.323899 Z" id="path-1"></path>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Resources/icons/triangle-right">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <use id="Shape" fill="#000000" fill-rule="nonzero" transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) " xlink:href="#path-1"></use>
+            <g id="Resources/Colour/black" mask="url(#mask-2)" fill="#000000">
+                <rect id="Rectangle" x="0" y="0" width="24" height="24"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

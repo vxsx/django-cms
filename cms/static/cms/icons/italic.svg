@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>Resources/icons/italic</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M19.6666667,3.30434783 C19.6666667,4.0236087 19.0496867,4.60869565 18.291219,4.60869565 L16.4868379,4.60869565 L9.2173675,19.3913043 L10.6545957,19.3913043 C11.4157456,19.3913043 12.0300434,19.9763913 12.0300434,20.6956522 C12.0300434,21.414913 11.4157456,22 10.6545957,22 L4.37544771,22 C3.61697999,22 3,21.414913 3,20.6956522 C3,19.9763913 3.61697999,19.3913043 4.37544771,19.3913043 L6.17982878,19.3913043 L13.4492992,4.60869565 L12.0120709,4.60869565 C11.2509211,4.60869565 10.6366232,4.0236087 10.6366232,3.30434783 C10.6366232,2.58508696 11.2509211,2 12.0120709,2 L18.291219,2 C19.0496867,2 19.6666667,2.58508696 19.6666667,3.30434783 Z" id="path-1"></path>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Resources/icons/italic">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <use id="Page-1" fill="#000000" xlink:href="#path-1"></use>
+            <g id="Resources/Colour/black" mask="url(#mask-2)" fill="#000000">
+                <rect id="Rectangle" x="0" y="0" width="24" height="24"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

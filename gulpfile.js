@@ -5,10 +5,12 @@ var gutil = require('gulp-util');
 var plumber = require('gulp-plumber');
 var fs = require('fs');
 var autoprefixer = require('autoprefixer');
+var prefixer = require('postcss-prefixer');
+var autoreset = require('postcss-autoreset');
+var initial = require('postcss-initial');
 var postcss = require('gulp-postcss');
 var gulpif = require('gulp-if');
-var iconfont = require('gulp-iconfont');
-var iconfontCss = require('gulp-iconfont-css');
+var svgSprites = require('gulp-svg-sprites');
 var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
 var minifyCss = require('gulp-clean-css');
@@ -29,8 +31,9 @@ var PROJECT_PATH = {
     js: PROJECT_ROOT + '/js',
     sass: PROJECT_ROOT + '/sass',
     css: PROJECT_ROOT + '/css',
-    icons: PROJECT_ROOT + '/fonts',
-    tests: __dirname + '/cms/tests/frontend'
+    icons: PROJECT_ROOT + '/icons',
+    tests: __dirname + '/cms/tests/frontend',
+    sprites: PROJECT_ROOT + '/sprites'
 };
 
 var PROJECT_PATTERNS = {
@@ -46,7 +49,7 @@ var PROJECT_PATTERNS = {
         '!' + PROJECT_PATH.js + '/dist/*.js'
     ],
     sass: [PROJECT_PATH.sass + '/**/*.{scss,sass}'],
-    icons: [PROJECT_PATH.icons + '/src/*.svg']
+    icons: [PROJECT_PATH.icons + '/*.svg']
 };
 
 var INTEGRATION_TESTS = [
@@ -109,7 +112,7 @@ var CMS_VERSION = fs.readFileSync('cms/__init__.py', { encoding: 'utf-8' }).matc
 // #TASKS#
 gulp.task('sass', function() {
     gulp
-        .src(PROJECT_PATTERNS.sass)
+        .src(PROJECT_PATTERNS.sass, { cwd: PROJECT_PATH.sass + '/' })
         .pipe(gulpif(options.debug, sourcemaps.init()))
         .pipe(sass())
         .on('error', function(error) {
@@ -117,8 +120,17 @@ gulp.task('sass', function() {
         })
         .pipe(
             postcss([
+                autoreset(),
+                initial({
+                    reset: 'all',
+                    replace: true,
+                    ignore: 'svg'
+                }),
                 autoprefixer({
                     cascade: false
+                }),
+                prefixer({
+                    prefix: 'cms-'
                 })
             ])
         )
@@ -132,26 +144,24 @@ gulp.task('sass', function() {
 });
 
 gulp.task('icons', function() {
-    gulp
+    const config = {
+        mode: 'symbols',
+        preview: true,
+        svgPath: '../sprites/icons.svg',
+        selector: 'cms-icon-%f',
+        svg: {
+            symbols: 'icons.svg'
+        }
+    };
+
+    return gulp
         .src(PROJECT_PATTERNS.icons)
-        .pipe(
-            iconfontCss({
-                fontName: 'django-cms-iconfont',
-                fontPath: '../../fonts/' + CMS_VERSION + '/',
-                path: PROJECT_PATH.sass + '/libs/_iconfont.scss',
-                targetPath: '../../sass/components/_iconography.scss'
-            })
-        )
-        .pipe(
-            iconfont({
-                fontName: 'django-cms-iconfont',
-                normalize: true
-            })
-        )
-        .on('glyphs', function(glyphs, opts) {
-            gutil.log.bind(glyphs, opts);
+        .pipe(svgSprites(config))
+        .on('error', function(error) {
+            gutil.log(gutil.colors.red('Error (' + error.plugin + '): ' + error.messageFormatted));
         })
-        .pipe(gulp.dest(PROJECT_PATH.icons + '/' + CMS_VERSION + '/'));
+        // needs to be PROJECT_ROOT as the svgSprite config will do the rest
+        .pipe(gulp.dest(PROJECT_PATH.sprites + '/' + CMS_VERSION + '/'));
 });
 
 gulp.task('lint', ['lint:javascript']);

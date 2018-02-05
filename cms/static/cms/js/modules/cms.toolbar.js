@@ -58,7 +58,7 @@ var Toolbar = new Class({
         /**
          * @property {CMS.Navigation} navigation
          */
-        this.navigation = new Navigation();
+        // this.navigation = new Navigation();
 
         /**
          * @property {Object} _position
@@ -418,8 +418,6 @@ var Toolbar = new Class({
     _initialStates: function _initialStates() {
         var publishBtn = $('.cms-btn-publish').parent();
 
-        this._show({ duration: 0 });
-
         // hide publish button
         publishBtn.hide().attr('data-cms-hidden', 'true');
 
@@ -471,36 +469,6 @@ var Toolbar = new Class({
         // add toolbar ready class to body and fire event
         this.ui.body.addClass('cms-ready');
         this.ui.document.trigger('cms-ready');
-    },
-
-    /**
-     * Animation helper for opening the toolbar.
-     *
-     * @method _show
-     * @private
-     * @param {Object} [opts]
-     * @param {Number} [opts.duration] time in milliseconds for toolbar to animate
-     */
-    _show: function _show(opts) {
-        var that = this;
-        var speed = opts && opts.duration !== undefined ? opts.duration : this.options.toolbarDuration;
-        var toolbarHeight = $('.cms-toolbar').height() + TOOLBAR_OFFSCREEN_OFFSET;
-
-        this.ui.body.addClass('cms-toolbar-expanding');
-        // animate html
-        this.ui.body.animate(
-            {
-                'margin-top': toolbarHeight - TOOLBAR_OFFSCREEN_OFFSET
-            },
-            speed,
-            'linear',
-            function() {
-                that.ui.body.removeClass('cms-toolbar-expanding');
-                that.ui.body.addClass('cms-toolbar-expanded');
-            }
-        );
-        // set messages top to toolbar height
-        this.ui.messages.css('top', toolbarHeight - TOOLBAR_OFFSCREEN_OFFSET);
     },
 
     /**

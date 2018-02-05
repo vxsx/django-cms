@@ -1,12 +1,9 @@
 {% extends "cms/toolbar/toolbar.html" %}
 {% load i18n l10n %}
 
-{% block toolbar_top %}
+{% block toolbar_bottom %}
     <div class="cms-tooltip">{% trans "Double-click to edit" %}<span></span></div>
     <div class="cms-tooltip-touch">{% trans "Tap to edit" %}<span></span></div>
-{% endblock %}
-
-{% block toolbar_bottom %}
     {# start: messages #}
     <div class="cms-messages">
         <div class="cms-messages-close" title="{% trans 'Close' %}"><span class="cms-icon cms-icon-close"></span></div>

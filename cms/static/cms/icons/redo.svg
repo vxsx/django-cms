@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>Resources/icons/redo</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M14.189,5 C14.135,5 13.751,5 13.751,5.438 L13.751,9.811 C13.751,10.052 13.947,10.249 14.189,10.249 C14.431,10.249 14.599,10.017 14.785,9.833 L16.001,8.617 C16.775,9.532 17.247,10.708 17.247,11.998 C17.247,14.898 14.897,17.246 11.998,17.246 C10.632,17.246 9.387,16.724 8.453,15.869 C7.406,14.91 6.749,13.531 6.749,11.998 L5,11.998 C5,14.014 5.852,15.831 7.215,17.107 C8.466,18.279 10.148,18.996 11.998,18.996 C15.863,18.996 18.996,15.864 18.996,11.998 C18.996,10.222 18.333,8.608 17.244,7.375 L18.497,6.12 C18.733,5.883 19,5.678 19,5.438 C19,5.197 18.805,5 18.562,5 L14.189,5 Z" id="path-1"></path>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Resources/icons/redo">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <g id="Clip-2" transform="translate(12.000000, 11.998000) scale(-1, 1) rotate(275.000000) translate(-12.000000, -11.998000) "></g>
+            <g id="Resources/Colour/black" mask="url(#mask-2)" fill="#000000">
+                <rect id="Rectangle" x="0" y="0" width="24" height="24"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

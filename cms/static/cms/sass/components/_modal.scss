@@ -1,8 +1,4 @@
-//##############################################################################
-// MODAL
-
-// Editing plugins in frontend
-.cms-modal {
+.modal {
     display: none;
     position: fixed;
     top: 50%;
@@ -14,14 +10,15 @@
     box-shadow: $modal-shadow;
     user-select: none;
     opacity: 0;
+    outline: none;
     transform: translate3d(0, -10%, 0);
     transition: transform 150ms, opacity 150ms;
 
-    @at-root .cms-structure-mode-structure & {
+    @at-root .structure-mode-structure & {
         transform: translate3d(10%, 0, 0);
     }
 
-    .cms-modal-maximized & {
+    .modal-maximized & {
         right: 0;
         bottom: 0;
         top: 0 !important;
@@ -31,47 +28,47 @@
         width: auto !important;
         height: auto !important;
 
-        .cms-modal-title {
+        .modal-title {
             // set correct cursor when maximized #3111
             cursor: default;
         }
     }
 
-    .cms-modal-minimized & {
+    .modal-minimized & {
         width: auto !important;
         height: auto !important;
         top: 1px !important;
         margin: 0 !important;
 
-        .cms-modal-body,
-        .cms-modal-breadcrumb,
-        .cms-modal-foot {
+        .modal-body,
+        .modal-breadcrumb,
+        .modal-foot {
             display: none !important;
         }
-        .cms-modal-title {
+        .modal-title {
             // set correct cursor when maximized #3111
             cursor: default;
             padding-right: $modal-header-button-area-size * 3;
         }
-        .cms-modal-title-suffix {
+        .modal-title-suffix {
             display: none;
         }
-        .cms-modal-minimize {
+        .modal-minimize {
             right: $modal-header-button-area-size + $padding-base;
         }
     }
 }
-.cms-modal-morphing {
+.modal-morphing {
     transition: all $speed-base;
 }
-.cms-modal-open {
+.modal-open {
     opacity: 1;
-    @at-root .cms-structure-mode-structure &,
+    @at-root .structure-mode-structure &,
     & {
         transform: translate3d(0, 0, 0);
     }
 }
-.cms-modal-body {
+.modal-body {
     position: absolute;
     z-index: z(modal, body);
     left: 0;
@@ -83,7 +80,7 @@
     border-bottom: 1px solid $gray-lighter;
 }
 
-.cms-modal-foot {
+.modal-foot {
     position: absolute;
     overflow: hidden;
     clear: both;
@@ -96,7 +93,7 @@
 // this elements shows up on top of an iframe as soon as the dragging starts
 // so if you are moving the mouse really fast and mouse hovers over an iframe
 // mouse events do not go to the iframe but keep firing in the parent document
-.cms-modal-shim {
+.modal-shim {
     display: none;
     position: absolute;
     top: 0;
@@ -105,7 +102,7 @@
     width: 100%;
     height: 100%;
 }
-.cms-modal-frame {
+.modal-frame {
     position: relative;
     z-index: z(modal, frame);
     width: 100%;
@@ -114,7 +111,7 @@
     -webkit-overflow-scrolling: touch;
     overflow-y: auto;
 }
-.cms-modal-frame iframe {
+.modal-frame iframe {
     display: block;
     // starting from iOS 4.something iframe size is forced
     // to be equal to it's contents height, so these are not really
@@ -123,14 +120,15 @@
     height: 100%;
 }
 
-.cms-modal-head {
+.modal-head {
     position: relative;
 }
-.cms-modal-title {
+.modal-title {
     display: block;
     color: $gray-darker;
-    font-size: $modal-header-title-font-size;
+    font-family: $font-family;
     font-weight: bold;
+    font-size: $modal-header-title-font-size;
     line-height: $modal-header-height;
     min-height: $modal-header-height;
     padding: 0 $padding-large;
@@ -139,15 +137,15 @@
     overflow: hidden;
     text-overflow: ellipsis;
     margin-right: $modal-header-button-area-size * 3 + $padding-normal;
-    .cms-modal-title-suffix {
+    .modal-title-suffix {
         font-weight: normal;
         padding-left: $padding-normal;
     }
 }
 
-.cms-modal-minimize,
-.cms-modal-close,
-.cms-modal-maximize {
+.modal-minimize,
+.modal-close,
+.modal-maximize {
     display: block;
     position: absolute;
     top: 50%;
@@ -166,30 +164,30 @@
         color: $color-primary;
     }
 }
-.cms-modal-minimize {
+.modal-minimize {
     right: 2 * $modal-header-button-area-size + $padding-normal;
-    .cms-modal-minimized & {
-        @include icon(plus);
+    .modal-minimized & {
+        // @include icon(plus);
         color: $color-primary;
     }
-    .cms-modal-maximized & {
+    .modal-maximized & {
         // ensure minimize button is hidden #3111
         display: none !important;
     }
 }
-.cms-modal-maximize {
+.modal-maximize {
     right: $modal-header-button-area-size + $padding-normal;
     // ensure maximize element is hidden #3111
-    .cms-modal-minimized & {
+    .modal-minimized & {
         display: none !important;
     }
-    .cms-modal-maximized & {
+    .modal-maximized & {
         color: $color-primary;
-        @include icon(minimize);
+        // @include icon(minimize);
     }
 }
 
-.cms-modal-resize {
+.modal-resize {
     position: absolute;
     right: 0;
     bottom: 0;
@@ -208,7 +206,7 @@
 }
 
 // breadcrumb only shows for nested elements
-.cms-modal-breadcrumb {
+.modal-breadcrumb {
     display: none !important;
     font-size: $font-size-normal;
     line-height: $modal-breadcrumb-height;
@@ -241,7 +239,7 @@
 }
 
 // buttons
-.cms-modal-buttons {
+.modal-buttons {
     position: absolute;
     top: 0;
     right: 0;
@@ -249,44 +247,30 @@
     z-index: z(modal, buttons);
     padding: 0 $modal-resize-size 0 $padding-normal;
 }
-.cms-modal-item-buttons {
+.modal-item-buttons {
     $margin: ($toolbar-height - $toolbar-button-height) / 2;
-    @extend .cms-toolbar-item-buttons;
     float: right;
     margin-left: $margin;
 }
-.cms-modal-item-buttons-left {
+.modal-item-buttons-left {
     float: left;
 }
 
 // alter footer when html markup is loaded
-.cms-modal-markup {
-    .cms-modal-foot {
+.modal-markup {
+    .modal-foot {
         height: $modal-footer-height / 2;
     }
-    .cms-modal-body {
+    .modal-body {
         bottom: $modal-footer-height / 2;
     }
 }
 
-.cms-modal-has-breadcrumb {
-    .cms-modal-body {
+.modal-has-breadcrumb {
+    .modal-body {
         top: $modal-header-height + $modal-breadcrumb-height !important;
     }
-    .cms-modal-breadcrumb {
+    .modal-breadcrumb {
         display: block !important;
-    }
-}
-
-// placed outside the cms-toolbar scope
-@at-root .cms-modal-maximized {
-    overflow: hidden !important;
-    .cms.cms-toolbar-debug .cms-modal {
-        top: $toolbar-debug-height !important;
-    }
-}
-@at-root .cms-modal-minimized {
-    .cms.cms-toolbar-debug .cms-modal {
-        top: $toolbar-debug-height + 1px !important;
     }
 }

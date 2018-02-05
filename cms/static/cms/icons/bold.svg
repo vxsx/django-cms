@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>Resources/icons/bold</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M17.1346789,11.3932143 C18.0010579,10.3985 18.5263158,9.11503571 18.5263158,7.71428571 C18.5263158,4.56417857 15.8811632,2 12.6315789,2 L6,2 L6,22 L14.1052632,22 C17.3548474,22 20,19.4358214 20,16.2857143 C20,14.2098214 18.8486842,12.3946429 17.1346789,11.3932143 Z M9,5 L12.3333333,5 C13.8034,5 15,6.346175 15,8 C15,9.653825 13.8034,11 12.3333333,11 L9,11 L9,5 Z M14.0909091,19 L9,19 L9,13 L14.0909091,13 C15.6946182,13 17,14.346175 17,16 C17,17.653825 15.6946182,19 14.0909091,19 Z" id="path-1"></path>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Resources/icons/bold">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <use id="Page-1" fill="#000000" xlink:href="#path-1"></use>
+            <g id="Resources/Colour/black" mask="url(#mask-2)" fill="#000000">
+                <rect id="Rectangle" x="0" y="0" width="24" height="24"></rect>
+            </g>
+        </g>
+    </g>
+</svg>
