@@ -1,17 +1,17 @@
 //##############################################################################
 // CLIPBOARD
 
-.cms-clipboard {
+.clipboard {
     display: none;
 }
 
-.cms-clipboard-containers {
+.clipboard-containers {
     display: none !important;
     // custom style for draggable item
-    .cms-dragarea {
+    .dragarea {
         padding-top: $padding-base;
     }
-    .cms-draggable {
+    .draggable {
         display: block !important;
         position: relative;
         top: 0;
@@ -19,15 +19,15 @@
         border-radius: $border-radius-base;
         cursor: move;
     }
-    .cms-draggable .cms-dragitem {
+    .draggable .dragitem {
         line-height: $structure-dragitem-fullheight;
         height: $structure-dragitem-fullheight;
         padding-left: $padding-large;
     }
-    .cms-draggable .cms-dragitem .cms-submenu-btn {
+    .draggable .dragitem .submenu-btn {
         display: none !important;
     }
-    .cms-draggable .cms-dragitem-text {
+    .draggable .dragitem-text {
         display: block;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -35,10 +35,10 @@
         margin-right: 40px;
     }
 
-    .cms-plugins {
+    .plugins {
         display: none;
     }
-    .cms-droppable {
+    .droppable {
         position: absolute;
         top: 0;
         right: 0;
@@ -60,9 +60,9 @@
     }
 }
 
-.cms-modal-markup .cms-clipboard-containers {
+.modal-markup .clipboard-containers {
     display: block !important;
-    .cms-is-dragging {
+    .is-dragging {
         display: block !important;
         opacity: 0.3;
     }

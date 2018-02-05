@@ -12,6 +12,7 @@
 CMS._plugins = CMS._plugins || [];
 // this is a global shared configuration
 CMS.config = {
+    'email': '{{ user.email }}',
     'mode': {% if cms_toolbar.edit_mode_active %}'draft'{% else %}'live'{% endif %},
     'auth': {% if user.is_authenticated %}true{% else %}false{% endif %},
     'debug': {% if debug %}true{% else %}false{% endif %},

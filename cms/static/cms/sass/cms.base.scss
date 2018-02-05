@@ -2,6 +2,22 @@
 
 @import "old/mixins/all";
 @import "old/settings/cms";
+
+.cms {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: z(base);
+    width: 100%;
+}
+
+.prevent-scrolling {
+    overflow: hidden !important;
+    body {
+        overflow: hidden !important;
+    }
+}
+
 @import "components/icons";
 @import "components/forms";
 @import "components/toolbar";
@@ -20,35 +36,96 @@
 // @import "components/loader";
 //
 // // div.cms needs to beat .cms-reset a selectors
-// div.cms {
-//     @import "components/tooltip";
+@import "old/components/clipboard";
+@import "old/components/tooltip";
 //     @import "components/button";
 //     @import "components/dropdown";
-//     @import "components/toolbar";
+    // @import "old/components/toolbar";
 //     @import "components/modal";
-//     @import "components/sideframe";
-//     @import "components/structureboard";
-//     @import "components/subnav";
-//     @import "components/clipboard";
-//     @import "components/pluginpicker";
-//     @import "components/shortcuts";
+@import "old/components/sideframe";
+@import "old/components/structureboard";
+@import "old/components/subnav";
+@import "old/components/pluginpicker";
+@import "old/components/shortcuts";
+
+.messages {
+    display: none;
+    position: fixed;
+    top: $toolbar-height;
+    z-index: z(messages);
+    color: $messages-color;
+    font-size: $messages-font-size;
+    font-weight: $messages-font-weight;
+    line-height: $messages-line-height;
+    width: $messages-width;
+    min-height: $messages-line-height;
+    margin: 0;
+    padding: $messages-padding;
+    border-radius: 0 0 $messages-border-radius $messages-border-radius;
+    background: rgba($messages-bgcolor, 0.74);
+    transition: top $speed-base;
+    * {
+        color: $messages-color;
+        font-size: $messages-font-size;
+        font-weight: $messages-font-weight;
+        line-height: $messages-line-height;
+    }
+
+    a {
+        color: $color-primary;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+    strong {
+        color: lighten($color-primary, 10%);
+        font-weight: $messages-font-weight;
+    }
+    ul {
+        display: inline;
+        color: $messages-color;
+    }
+    ul li {
+        display: inline;
+        color: $messages-color;
+        font-weight: $messages-font-weight;
+    }
+
+    .cms-messages-close {
+        cursor: pointer;
+        display: none;
+        float: right;
+        position: relative;
+        width: $messages-close-area-size;
+        height: $messages-line-height;
+        text-align: right;
+        span {
+            font-size: $messages-close-icon-size;
+        }
+        &:hover span {
+            color: $color-primary;
+        }
+    }
+}
+.messages-error strong {
+    color: $color-danger;
+}
 //
-//     *:not(.cms-modal):focus {
-//         outline: 2px dotted $gray-darker;
-//         outline-offset: -3px;
-//
-//         &::-moz-focus-inner {
-//             border: 0 !important;
-//         }
-//         @media screen and (-webkit-min-device-pixel-ratio: 0) {
-//             outline: 5px auto -webkit-focus-ring-color;
-//             outline-offset: -3px;
-//         }
-//
-//         .cms-hover-tooltip {
-//             display: none;
-//         }
-//     }
+    // *:not(.cms-modal):focus {
+    //     outline: 2px dotted $gray-darker;
+    //     outline-offset: -3px;
+    //
+    //     &::-moz-focus-inner {
+    //         border: 0 !important;
+    //     }
+    //     @media screen and (-webkit-min-device-pixel-ratio: 0) {
+    //         outline: 5px auto -webkit-focus-ring-color;
+    //         outline-offset: -3px;
+    //     }
+    //
+    //     .cms-hover-tooltip {
+    //         display: none;
+    //     }
+    // }
 //
 //     @import "components/pagetree/node-state";
-// }

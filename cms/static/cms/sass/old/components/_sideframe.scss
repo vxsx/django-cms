@@ -2,7 +2,7 @@
 // SIDEFRAME
 
 // "Pages" frame on the left
-.cms-sideframe {
+.sideframe {
     display: none;
     position: fixed;
     top: 0;
@@ -16,7 +16,7 @@
     }
 }
 
-.cms-sideframe-frame {
+.sideframe-frame {
     position: absolute;
     left: 0;
     top: 0;
@@ -29,7 +29,7 @@
     -webkit-backface-visibility: hidden;
 
     iframe {
-        // even though on a touch device we actually scroll cms-sideframe-frame
+        // even though on a touch device we actually scroll sideframe-frame
         // this is still required
         -webkit-overflow-scrolling: touch;
         overflow-y: auto;
@@ -45,7 +45,7 @@
 // when resizing the sideframe shime get's z-index between frame
 // and resize in order for mouse events not to trigger on iframe, same as
 // with modal
-.cms-sideframe-shim {
+.sideframe-shim {
     position: absolute;
     top: 0;
     left: 0;
@@ -55,7 +55,7 @@
     background: transparent;
 }
 
-.cms-sideframe-controls {
+.sideframe-controls {
     position: absolute;
     top: $sideframe-buttons-position-top + $sideframe-buttons-offset;
     right: $sideframe-buttons-position-right;
@@ -65,11 +65,8 @@
     border-radius: $border-radius-base;
     border: 1px solid $gray-lighter;
 }
-&.cms-toolbar-debug .cms-sideframe-controls {
-    top: $sideframe-buttons-position-top + $sideframe-buttons-offset + $toolbar-debug-height;
-}
-.cms-sideframe-close,
-.cms-sideframe-history {
+.sideframe-close,
+.sideframe-history {
     display: inline-block;
     position: relative;
     cursor: pointer;
@@ -93,11 +90,11 @@
     }
 }
 
-.cms-sideframe-history {
+.sideframe-history {
     width: $sideframe-button-area-size * 2 + 1px;
     border-right: 1px solid $gray-lighter;
 
-    .cms-icon {
+    .icon {
         float: left;
         position: relative;
         left: 0;
@@ -105,18 +102,17 @@
         padding: 8px 4px 8px 12px;
         margin: 0;
     }
-    .cms-icon-arrow-forward {
-        @include icon(arrow-right);
+    .icon-arrow-forward {
         padding: 8px 12px 8px 4px;
     }
     // disabled state if there is no history
-    .cms-icon-disabled {
+    .icon-disabled {
         opacity: 0.5;
         cursor: not-allowed;
     }
 }
 
-.cms-sideframe-dimmer {
+.sideframe-dimmer {
     display: none;
     position: fixed;
     top: 0;

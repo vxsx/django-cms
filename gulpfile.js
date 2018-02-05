@@ -120,17 +120,19 @@ gulp.task('sass', function() {
         })
         .pipe(
             postcss([
-                autoreset(),
-                initial({
-                    reset: 'all',
-                    replace: true,
-                    ignore: 'svg'
-                }),
+                // TODO fix me
+                // autoreset(),
+                // initial({
+                //     reset: 'all',
+                //     replace: true,
+                //     ignore: 'svg'
+                // }),
                 autoprefixer({
                     cascade: false
                 }),
                 prefixer({
-                    prefix: 'cms-'
+                    prefix: 'cms-',
+                    ignore: [/.cms-/, '.cms']
                 })
             ])
         )

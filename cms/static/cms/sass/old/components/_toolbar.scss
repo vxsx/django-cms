@@ -343,68 +343,6 @@
 
 //###########################################################
 // #TOOLBAR/dialog#
-.cms-messages {
-    display: none;
-    position: fixed;
-    top: $toolbar-height;
-    z-index: z(messages);
-    color: $messages-color;
-    font-size: $messages-font-size;
-    font-weight: $messages-font-weight;
-    line-height: $messages-line-height;
-    width: $messages-width;
-    min-height: $messages-line-height;
-    margin: 0;
-    padding: $messages-padding;
-    border-radius: 0 0 $messages-border-radius $messages-border-radius;
-    background: rgba($messages-bgcolor, 0.74);
-    transition: top $speed-base;
-    * {
-        color: $messages-color;
-        font-size: $messages-font-size;
-        font-weight: $messages-font-weight;
-        line-height: $messages-line-height;
-    }
-
-    a {
-        color: $color-primary;
-    }
-    a:hover {
-        text-decoration: underline;
-    }
-    strong {
-        color: lighten($color-primary, 10%);
-        font-weight: $messages-font-weight;
-    }
-    ul {
-        display: inline;
-        color: $messages-color;
-    }
-    ul li {
-        display: inline;
-        color: $messages-color;
-        font-weight: $messages-font-weight;
-    }
-
-    .cms-messages-close {
-        cursor: pointer;
-        display: none;
-        float: right;
-        position: relative;
-        width: $messages-close-area-size;
-        height: $messages-line-height;
-        text-align: right;
-        span {
-            font-size: $messages-close-icon-size;
-        }
-        &:hover span {
-            color: $color-primary;
-        }
-    }
-}
-.cms-messages-error strong {
-    color: $color-danger;
-}
 
 //###########################################################
 // #TOOLBAR/elements/logo#

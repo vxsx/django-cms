@@ -26,6 +26,7 @@ import Tooltip from './modules/cms.tooltip';
 
 // NEW
 import initLogin from 'components/login';
+import { initToolbar } from 'components/toolbar';
 
 // CMS by this time is a global that has `_plugins` property
 CMS.Messages = Messages;
@@ -51,4 +52,7 @@ window.CMS = CMS;
 
 
 // NEW
-initLogin();
+$(() => {
+    initLogin();
+    initToolbar();
+});

@@ -1,7 +1,7 @@
 //##############################################################################
 // STRUCTURE
 
-.cms-droppable {
+.droppable {
     position: relative;
     z-index: z(structure, content, droppable);
     line-height: 0;
@@ -9,7 +9,7 @@
     min-height: 0;
     box-shadow: 0 0 0 2px $color-primary;
     transform: translateY(2px);
-    .cms-draggable + & {
+    .draggable + & {
         transform: translateY(-2px);
     }
     &:before {
@@ -24,14 +24,14 @@
         border-left: 8px solid $color-primary;
     }
 }
-.cms-draggables > .cms-droppable:first-child {
+.draggables > .droppable:first-child {
     transform: translateY(-2px);
 }
-.cms-draggables > .cms-droppable:only-child {
+.draggables > .droppable:only-child {
     transform: translateY(2px);
 }
 
-.cms-structure {
+.structure {
     display: none;
     position: fixed;
     top: 0;
@@ -41,7 +41,7 @@
     height: 100%;
     background: $structure-bgcolor;
 
-    .cms-structure-content {
+    .structure-content {
         position: relative;
         overflow-y: scroll;
         top: 0;
@@ -64,34 +64,34 @@
     //###########################################################
     // #DRAGAREA#
     // basically a cms placeholder representation
-    .cms-dragarea {
+    .dragarea {
         position: static;
         max-width: $structure-max-width;
         margin: $structure-dragarea-margin-vertical auto;
         padding: $structure-dragarea-padding $structure-dragarea-padding-horizontal;
     }
 
-    .cms-dragbar .cms-submenu-item-highlight {
+    .dragbar .submenu-item-highlight {
         display: none;
     }
 
-    .cms-dragarea-static {
-        > .cms-draggables {
+    .dragarea-static {
+        > .draggables {
             display: none;
         }
-        > .cms-dragbar > .cms-btn {
+        > .dragbar > .btn {
             display: none;
         }
-        .cms-dragarea-static-icon {
+        .dragarea-static-icon {
             position: relative;
             top: 2px;
         }
     }
-    .cms-dragarea-static-expanded {
-        > .cms-draggables {
+    .dragarea-static-expanded {
+        > .draggables {
             display: block;
         }
-        > .cms-dragbar > .cms-btn {
+        > .dragbar > .btn {
             display: block;
         }
     }
@@ -100,7 +100,7 @@
     // #DRAGBAR#
     //
     // Placeholder box title
-    .cms-dragbar {
+    .dragbar {
         position: relative;
         top: 0;
         left: 0;
@@ -109,7 +109,7 @@
         padding-left: $border-radius-normal + 2px;
         border-radius: $border-radius-base;
 
-        .cms-dragbar-title {
+        .dragbar-title {
             display: block;
             white-space: nowrap;
             overflow: hidden;
@@ -122,7 +122,7 @@
             height: $structure-dragbar-height;
             margin-right: $submenu-icon-area-size * 2 + 25px;
         }
-        .cms-dragbar-toggler {
+        .dragbar-toggler {
             position: absolute;
             right: 0;
             background-image: linear-gradient(to right, rgba($structure-bgcolor, 0) 0, $structure-bgcolor 40px);
@@ -139,53 +139,53 @@
                 }
             }
         }
-        .cms-dragbar-collapse-all {
+        .dragbar-collapse-all {
             display: none;
         }
-        .cms-dragbar-expand-all {
+        .dragbar-expand-all {
             display: inline;
         }
-        .cms-dragbar-title-expanded {
-            .cms-dragbar-collapse-all {
+        .dragbar-title-expanded {
+            .dragbar-collapse-all {
                 display: inline;
             }
-            .cms-dragbar-expand-all {
+            .dragbar-expand-all {
                 display: none;
             }
         }
     }
 
     // #DRAGBAR/empty#
-    .cms-dragbar-empty {
+    .dragbar-empty {
         font-size: $font-size-small;
         text-transform: uppercase;
         padding-top: 0;
         padding-bottom: 0;
     }
 
-    .cms-dragarea-empty {
-        .cms-dragbar-empty-wrapper {
+    .dragarea-empty {
+        .dragbar-empty-wrapper {
             display: block !important;
         }
-        .cms-dragbar-toggler {
+        .dragbar-toggler {
             display: none;
         }
     }
 
     //###########################################################
     // #DRAGITEM#
-    .cms-draggables {
+    .draggables {
         margin: 0;
         padding: 0;
         list-style-type: none;
     }
-    .cms-draggables.cms-hidden {
+    .draggables.hidden {
         display: none !important;
     }
-    .cms-draggables .cms-draggables {
+    .draggables .draggables {
         padding-left: $structure-draggable-inner-padding;
     }
-    .cms-dragarea-empty .cms-draggables-root {
+    .dragarea-empty .draggables-root {
         position: relative;
         min-height: 50px;
         border: 2px solid $btn-default-border;
@@ -193,7 +193,7 @@
     }
 
     // #DRAGGABLES/general#
-    .cms-draggable {
+    .draggable {
         display: block !important; // fixes hide/show with jqueryui so the scroll doesn't jump
         top: 0;
         left: 0;
@@ -207,7 +207,7 @@
         touch-action: none;
 
         // levels
-        .cms-draggable {
+        .draggable {
             border-color: $gray-lighter;
             &:hover {
                 border-color: $gray-light;
@@ -215,18 +215,18 @@
         }
 
         // menu overwrites
-        .cms-submenu-dropdown-top {
+        .submenu-dropdown-top {
             top: $structure-dragitem-height + $structure-dragarea-padding * 2;
         }
-        .cms-submenu-dropdown-bottom {
+        .submenu-dropdown-bottom {
             bottom: $structure-dragitem-height + $structure-dragarea-padding * 2;
         }
 
-        .cms-dragitem {
+        .dragitem {
             line-height: $structure-dragitem-height;
             border: 2px solid $structure-bgcolor;
         }
-        .cms-dragitem-text {
+        .dragitem-text {
             display: block;
             position: relative;
             overflow: hidden;
@@ -235,24 +235,24 @@
             margin-right: $submenu-icon-area-size * 3 + $submenu-right * 4;
             padding: $structure-dragarea-padding $structure-dragarea-padding-horizontal;
         }
-        .cms-dragitem-collapsable .cms-dragitem-text {
+        .dragitem-collapsable .dragitem-text {
             padding-left: $structure-dragitem-icon-space;
         }
     }
 
-    .cms-collapsable-container.cms-hidden > .cms-draggable {
+    .collapsable-container.hidden > .draggable {
         display: none !important;
     }
 
-    .cms-draggable-success {
+    .draggable-success {
         position: relative;
     }
 
-    .cms-draggables-empty {
+    .draggables-empty {
         display: none;
     }
-    .cms-dragarea-empty {
-        .cms-droppable {
+    .dragarea-empty {
+        .droppable {
             position: absolute;
             top: -1px;
             right: -1px;
@@ -271,12 +271,12 @@
             &:before {
                 display: none;
             }
-            &.cms-draggable-disallowed {
+            &.draggable-disallowed {
                 border: 2px solid saturate($color-danger, 80%);
                 background: rgba($color-danger, 0.1);
             }
         }
-        .cms-draggables-empty {
+        .draggables-empty {
             display: block;
             position: absolute;
             top: 0;
@@ -288,7 +288,7 @@
             line-height: 44px;
             padding-left: 20px;
         }
-        > .cms-draggables-root > .cms-add-plugin-placeholder {
+        > .draggables-root > .add-plugin-placeholder {
             position: absolute;
             right: 0;
             left: 0;
@@ -298,16 +298,16 @@
     }
 
     // #DRAGGABLES/specific#
-    .cms-draggable {
+    .draggable {
         color: $black;
     }
-    .cms-draggable-is-dragging {
+    .draggable-is-dragging {
         z-index: z(default);
         width: $structure-draggable-width-while-dragging !important;
         height: $structure-dragitem-fullheight !important;
         border-radius: 0;
         transform: translateZ(0);
-        .cms-dragitem {
+        .dragitem {
             color: $white !important;
             border: none;
             border-radius: 0;
@@ -317,31 +317,31 @@
                 display: none;
                 color: white;
             }
-            .cms-draggables {
+            .draggables {
                 display: none;
             }
-            .cms-dragitem-text {
+            .dragitem-text {
                 padding-left: $structure-dragarea-padding-horizontal;
             }
         }
-        .cms-dragitem-text {
+        .dragitem-text {
             margin-right: 0;
         }
-        &.cms-draggable-from-clipboard .cms-dragitem-text {
+        &.draggable-from-clipboard .dragitem-text {
             margin-right: $padding-large;
         }
-        &.cms-draggable-disabled > .cms-draggable {
+        &.draggable-disabled > .draggable {
             display: none !important;
         }
     }
-    .cms-draggable-stack {
+    .draggable-stack {
         overflow: hidden;
         height: $structure-dragitem-fullheight !important;
         box-shadow: 1px 1px 1px rgba($black, 0.2),
             4px 4px 0 0 $color-primary;
     }
 
-    .cms-dragitem {
+    .dragitem {
         position: relative;
         border-radius: $border-radius-normal;
         cursor: move;
@@ -356,10 +356,8 @@
             box-shadow: inset 0 0 0 1px $gray-light;
         }
     }
-    .cms-dragitem-collapsable {
-        @include icon(arrow-wide);
+    .dragitem-collapsable {
         &:before {
-            @extend %icon;
             position: absolute;
             top: 50%;
             left: $structure-dragitem-icon-space - $structure-dragarea-padding-horizontal - 10px;
@@ -370,38 +368,38 @@
             cursor: pointer;
             transform: rotate(180deg);
         }
-        .cms-dragitem-text {
+        .dragitem-text {
             cursor: pointer;
         }
     }
-    .cms-dragitem-expanded:before {
+    .dragitem-expanded:before {
         transform: rotate(-90deg);
     }
     // #DRAGGABLES/states#
 
-    .cms-draggable-selected .cms-dragitem,
-    .cms-draggable-selected .cms-dragitem strong {
+    .draggable-selected .dragitem,
+    .draggable-selected .dragitem strong {
         color: adjust-hue($color-primary, 15deg);
     }
-    .cms-draggable-selected .cms-draggable .cms-dragitem,
-    .cms-draggable-selected .cms-draggable .cms-dragitem strong {
+    .draggable-selected .draggable .dragitem,
+    .draggable-selected .draggable .dragitem strong {
         color: $black;
     }
 
-    .cms-draggable-allowed,
-    .cms-draggable-hover-allowed,
-    .cms-draggable-placeholder {
+    .draggable-allowed,
+    .draggable-hover-allowed,
+    .draggable-placeholder {
         color: lighten($color-primary, 40%);
         border-color: lighten($color-primary, 40%);
     }
-    .cms-draggable-hover-allowed,
-    .cms-draggable-placeholder {
+    .draggable-hover-allowed,
+    .draggable-placeholder {
         color: $white;
         background: rgba($color-primary, 0.2);
     }
 
-    .cms-draggable-disallowed,
-    .cms-draggable-hover-disallowed {
+    .draggable-disallowed,
+    .draggable-hover-disallowed {
         color: saturate($color-danger, 80%);
         background: rgba($color-danger, 0.1);
         box-shadow: 0 0 0 2px saturate($color-danger, 80%);
@@ -411,22 +409,22 @@
     }
 
     // hide arrow when adding plugin-in-plugin within disabled item
-    .cms-draggable-disabled {
-        .cms-submenu {
+    .draggable-disabled {
+        .submenu {
             display: none;
         }
 
-        > .cms-dragitem-collapsable,
-        > .cms-dragitem {
-            .cms-submenu {
+        > .dragitem-collapsable,
+        > .dragitem {
+            .submenu {
                 display: block;
             }
         }
 
-        .cms-draggable {
+        .draggable {
             margin-left: $structure-draggable-inner-padding !important;
             margin-left: 15px;
-            .cms-dragitem {
+            .dragitem {
                 background-image: none;
                 &:hover {
                     box-shadow: none;
@@ -434,19 +432,19 @@
             }
         }
 
-        .cms-draggables,
-        .cms-droppable {
+        .draggables,
+        .droppable {
             display: none !important;
         }
     }
-    .cms-plugin-disabled {
+    .plugin-disabled {
         position: absolute;
         top: 50%;
         right: $submenu-right;
         width: $submenu-icon-area-size;
         height: $submenu-icon-area-size;
         margin-top: -($submenu-icon-area-size / 2);
-        .cms-icon {
+        .icon {
             $submenu-icon-size: 20px;
             position: absolute;
             top: 50%;
@@ -459,63 +457,64 @@
     }
 
     // end of dragarea
-    .cms-is-dragging {
+    .is-dragging {
         display: block !important;
         opacity: 0.3;
     }
 
-    &.cms-structure-condensed {
+}
+    .structure-condensed {
         width: 416px;
         right: 0;
         box-shadow: 0 0 5px 0 rgba(0,0,0,.2);
-        .cms-structure-content {
+        .structure-content {
             padding-left: 15px;
             padding-right: 15px;
             overflow-x: hidden;
         }
-        .cms-draggables .cms-draggables {
+        .draggables .draggables {
             padding-left: 15px;
         }
-        .cms-draggable-disabled {
-            .cms-draggable {
+        .draggable-disabled {
+            .draggable {
                 margin-left: 15px !important;
             }
         }
 
-        .cms-dragitem {
+        .dragitem {
             line-height: 24px;
             background-size: 8px 28px;
         }
-        .cms-dragitem-text {
+        .dragitem-text {
             padding-top: 8px;
             padding-bottom: 8px;
             margin-right: 110px;
             padding-right: 5px;
         }
-        .cms-dragarea-empty .cms-draggables-root {
+        .dragarea-empty .draggables-root {
             min-height: 43px;
         }
-        .cms-draggables-empty {
+        .draggables-empty {
             line-height: 40px;
         }
-        .cms-dragarea-empty > .cms-draggables-root > .cms-add-plugin-placeholder {
+        .dragarea-empty > .draggables-root > .add-plugin-placeholder {
             height: 44px;
         }
-        .cms-add-plugin-placeholder {
+        .add-plugin-placeholder {
             line-height: 38px;
         }
-        .cms-submenu-btn {
+        .submenu-btn {
             width: 32px;
             height: 32px;
             margin-top: -16px;
         }
-        .cms-submenu-add {
+        .submenu-add {
             right: 39px;
         }
-        .cms-submenu-edit {
+        .submenu-edit {
             right: 39px + 32px + 4px;
         }
-        .cms-submenu-dropdown-settings .cms-submenu-item a {
+        .submenu-dropdown-settings .submenu-item a {
             &,
             &:before {
                 line-height: 40px;
@@ -523,19 +522,18 @@
             }
         }
 
-        .cms-dragarea {
+        .dragarea {
             padding: 0;
         }
-        .cms-dragbar-title {
+        .dragbar-title {
             margin-right: $submenu-icon-area-size * 2 + 10px;
         }
-        .cms-draggable-stack {
+        .draggable-stack {
             height: $structure-dragitem-fullheight - 6px !important;
         }
     }
-}
 
-@at-root .cms-dragitem-success {
+@at-root .dragitem-success {
     position: absolute;
     top: -2px;
     right: -2px;
@@ -547,7 +545,7 @@
     border-radius: $border-radius-base;
     opacity: 0.6;
 
-    &.cms-plugin-overlay-see-through {
+    &.plugin-overlay-see-through {
         top: -3px;
         right: -3px;
         left: -3px;
@@ -557,13 +555,13 @@
         opacity: 0.6;
         pointer-events: none;
     }
-    &.cms-plugin-overlay-prominent {
+    &.plugin-overlay-prominent {
         box-shadow: 0px 0px 20px $color-primary;
     }
 }
 
 
-@at-root .cms-structure-mode-structure {
+@at-root .structure-mode-structure {
     // overflow: hidden;
 
     // min-height is necessary for iOS9
@@ -576,18 +574,18 @@
 }
 
 // hide elements when dragging
-@at-root .ui-sortable-helper.cms-draggable .cms-submenu-btn {
+@at-root .ui-sortable-helper.draggable .submenu-btn {
     display: none !important;
 }
-@at-root .ui-sortable-helper.cms-draggable .cms-draggables {
+@at-root .ui-sortable-helper.draggable .draggables {
     display: none !important;
 }
 
-@at-root .cms-overflow {
+@at-root .overflow {
     overflow: hidden !important;
 }
 
-@at-root .cms-content-reloading {
+@at-root .content-reloading {
     position: fixed;
     width: 100%;
     left: 0;

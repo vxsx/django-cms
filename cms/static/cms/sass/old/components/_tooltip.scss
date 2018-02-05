@@ -2,9 +2,9 @@
 // TOOLTIP
 
 // used when hover over plugins in edit mode
-.cms-tooltip,
-.cms-tooltip-touch {
-    @include icon(pencil);
+.tooltip,
+.tooltip-touch {
+    // @include icon(pencil);
     visibility: hidden;
     position: absolute;
     top: 0;
@@ -18,17 +18,10 @@
     margin: 0;
     border-radius: $border-radius-base;
     background: $gray-darker;
+    font-family: $font-family;
 
-    &:before {
-        @extend %icon;
-        font-size: $tooltip-icon-size;
-        top: 50%;
-        left: ($tooltip-icon-area-size - $tooltip-icon-size) / 2;
-        margin-top: -($tooltip-icon-size / 2);
-        position: absolute;
-    }
-
-    span {
+    > span {
+        font-family: $font-family;
         position: absolute;
         top: 100%;
         right: 0;

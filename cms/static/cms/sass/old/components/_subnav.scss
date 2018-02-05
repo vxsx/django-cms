@@ -1,8 +1,7 @@
 //##############################################################################
 // SUBNAV
 
-.cms-submenu-btn {
-    @include icon(menu);
+.submenu-btn {
     display: block;
     position: absolute;
     right: $submenu-right;
@@ -12,7 +11,6 @@
     top: 50%;
     margin-top: -($submenu-icon-area-size / 2);
     &:before {
-        @extend %icon;
         position: absolute;
         left: 50%;
         top: 50%;
@@ -21,7 +19,7 @@
         color: $submenu-icon-color;
     }
 
-    .cms-hover-tooltip {
+    .hover-tooltip {
         position: absolute;
         left: 0;
         top: 0;
@@ -29,28 +27,26 @@
         bottom: 0;
     }
 }
-.cms-dragbar .cms-submenu-btn {
+.dragbar .submenu-btn {
     margin-right: 2px;
     background-color: transparent;
     &:active,
-    &.cms-btn-active {
+    &.btn-active {
         background-color: darken($btn-default-bgcolor, 10%);
     }
 }
-.cms-submenu-settings {
+.submenu-settings {
     border: none;
 }
 
-.cms-submenu-edit {
-    @include icon(pencil);
+.submenu-edit {
     right: $submenu-right * 3 + $submenu-icon-area-size * 2;
 }
-.cms-submenu-add {
-    @include icon(plus);
+.submenu-add {
     right: $submenu-right * 2 + $submenu-icon-area-size;
 }
-.cms-submenu-edit,
-.cms-submenu-add {
+.submenu-edit,
+.submenu-add {
     &:before {
         margin-left: -($icon-size / 2);
         margin-top: -($icon-size / 2);
@@ -58,7 +54,7 @@
     }
 }
 
-.cms-submenu-lang {
+.submenu-lang {
     position: absolute;
     top: 50%;
     height: $line-height-normal;
@@ -69,19 +65,19 @@
     border: 1px solid $gray-lighter;
     border-radius: $border-radius-base;
 }
-.cms-structure-content .cms-submenu-lang {
+.structure-content .submenu-lang {
     display: none;
 }
 
-.cms-submenu-dropdown-top {
+.submenu-dropdown-top {
     top: $structure-dragbar-height + $structure-dragarea-space;
 }
-.cms-submenu-dropdown-bottom {
+.submenu-dropdown-bottom {
     bottom: $structure-dragbar-height + $structure-dragarea-space;
 }
 
-// TODO this will be cms-submenu-dropdown (or rather cms-dropdown) in future
-.cms-submenu-dropdown-settings {
+// TODO this will be submenu-dropdown (or rather dropdown) in future
+.submenu-dropdown-settings {
     display: none;
     position: absolute;
     z-index: z(structure, content, dropdown);
@@ -92,7 +88,7 @@
     right: $submenu-right * 2 + $submenu-icon-area-size;
     transform: translateZ(0);
 
-    .cms-submenu-item {
+    .submenu-item {
         a {
             position: relative;
             display: block;
@@ -109,9 +105,8 @@
                 background: $color-primary;
             }
             &[data-rel],
-            &[data-cms-icon] {
+            &[data-icon] {
                 &:before {
-                    @extend %icon;
                     position: absolute;
                     left: $dropdown-item-icon-position;
                     top: 0;
@@ -119,23 +114,17 @@
                     line-height: $dropdown-item-height
                 }
             }
-            &[data-cms-icon=copy] {
-                @include icon(copy);
+            &[data-icon=copy] {
             }
-            &[data-cms-icon=paste] {
-                @include icon(paste);
+            &[data-icon=paste] {
             }
-            &[data-cms-icon=scissors] {
-                @include icon(scissors);
+            &[data-icon=scissors] {
             }
-            &[data-cms-icon=bin] {
-                @include icon(bin);
+            &[data-icon=bin] {
             }
             &[href*=alias_plugin] {
-                @include icon(alias);
             }
-            &[data-cms-icon=highlight] {
-                @include icon(highlight);
+            &[data-icon=highlight] {
             }
         }
         &:first-child a:hover,
@@ -147,10 +136,10 @@
             border-radius: 0 0 $border-radius-normal $border-radius-normal;
         }
     }
-    .cms-submenu-item-paste-tooltip {
+    .submenu-item-paste-tooltip {
         display: none;
     }
-    .cms-submenu-item-disabled {
+    .submenu-item-disabled {
         position: relative;
         a {
             &,
@@ -163,7 +152,7 @@
                 box-shadow: none;
             }
         }
-        .cms-submenu-item-paste-tooltip {
+        .submenu-item-paste-tooltip {
             cursor: default;
             position: absolute;
             left: 0;
@@ -185,7 +174,7 @@
         box-shadow: $dropdown-shadow;
     }
 
-    &.cms-submenu-dropdown-top {
+    &.submenu-dropdown-top {
         // TODO importants can be removed
         // after new "add plugin" is in place
         top: 0 !important;
@@ -193,30 +182,30 @@
             top: $dropdown-arrow-position !important;
         }
     }
-    &.cms-submenu-dropdown-bottom {
+    &.submenu-dropdown-bottom {
         bottom: 0 !important;
         &:before {
             bottom: $dropdown-arrow-position !important;
         }
     }
 
-    .cms-dropdown-inner {
+    .dropdown-inner {
         z-index: 1;
         background-color: white;
         border-radius: $border-radius-normal;
     }
 
 }
-.cms-dragbar .cms-submenu-dropdown-settings {
-    &.cms-submenu-dropdown-top:before {
+.dragbar .submenu-dropdown-settings {
+    &.submenu-dropdown-top:before {
         top: $dropdown-arrow-position - 4px !important;
     }
-    &.cms-submenu-dropdown-bottom:before {
+    &.submenu-dropdown-bottom:before {
         bottom: 12px !important;
         bottom: $dropdown-arrow-position - 4px !important;
     }
 }
 
-.cms-z-index-9999 {
+.z-index-9999 {
     z-index: 9999 !important;
 }

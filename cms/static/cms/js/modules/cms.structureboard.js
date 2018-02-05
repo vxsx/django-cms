@@ -401,7 +401,9 @@ class StructureBoard {
                     return elem.is('[type="text/cms-template"]'); // cms scripts
                 });
 
-                CMS.API.Toolbar._refreshMarkup(toolbar);
+                if (CMS.API.Toolbar) {
+                    CMS.API.Toolbar._refreshMarkup(toolbar);
+                }
 
                 $('body').append(scripts);
                 $('.cms-structure-content').html(structure.html());
@@ -514,7 +516,9 @@ class StructureBoard {
                 $('head').append(head);
                 bodyElement.prepend(toolbar);
 
-                CMS.API.Toolbar._refreshMarkup(newToolbar);
+                if (CMS.API.Toolbar) {
+                    CMS.API.Toolbar._refreshMarkup(newToolbar);
+                }
                 $(window).trigger('resize');
 
                 Plugin._refreshPlugins();
@@ -674,7 +678,7 @@ class StructureBoard {
             history.replaceState({}, '', url.toString());
         }
 
-        var width = this.ui.toolbar.width();
+        var width = this.ui.window.width();
         var scrollBarWidth = this.ui.window[0].innerWidth - width;
 
         if (!scrollBarWidth) {
@@ -1012,7 +1016,9 @@ class StructureBoard {
 
         this._loadToolbar()
             .done(newToolbar => {
-                CMS.API.Toolbar._refreshMarkup($(newToolbar).find('.cms-toolbar'));
+                if (CMS.API.Toolbar) {
+                    CMS.API.Toolbar._refreshMarkup($(newToolbar).find('.cms-toolbar'));
+                }
             })
             .fail(() => Helpers.reloadBrowser());
 
@@ -1257,7 +1263,9 @@ class StructureBoard {
         StructureBoard._replaceBodyWithHTML(newDoc.body.innerHTML);
         dd.apply(document.head, headDiff);
         toolbar.prependTo(document.body);
-        CMS.API.Toolbar._refreshMarkup(newToolbar);
+        if (CMS.API.Toolbar) {
+            CMS.API.Toolbar._refreshMarkup(newToolbar);
+        }
 
         $('.cms-structure-content').scrollTop(structureScrollTop);
 
