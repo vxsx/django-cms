@@ -100,7 +100,7 @@ class StructureBoard {
             dragitems: $('.cms-draggable'),
             dragareas: $('.cms-dragarea'),
             toolbarModeSwitcher: toolbar.find('.cms-toolbar-item-cms-mode-switcher'),
-            toolbarModeLinks: toolbar.find('.cms-toolbar-item-cms-mode-switcher a')
+            toolbarModeLinks: toolbar.find('.cms-structure-toggle')
         };
 
         this._preventScroll = new PreventParentScroll(this.ui.content[0]);
@@ -687,10 +687,6 @@ class StructureBoard {
 
         this.ui.html.removeClass('cms-overflow');
 
-        if (scrollBarWidth) {
-            // this.ui.toolbar.css('right', scrollBarWidth);
-            this.ui.container.css('right', -scrollBarWidth);
-        }
     }
 
     _makeFullWidth() {

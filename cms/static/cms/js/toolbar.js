@@ -50,7 +50,6 @@ initHelpShortcuts();
 
 window.CMS = CMS;
 
-
 // NEW
 $(() => {
     initLogin();

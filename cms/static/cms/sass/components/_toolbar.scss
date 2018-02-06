@@ -36,6 +36,7 @@
 }
 
 .toolbar-avatar {
+    display: block;
     width: 30px;
     height: 30px;
     background-size: 100% 100%;
@@ -46,6 +47,7 @@
         opacity: 0;
     }
 }
+
 .toolbar-action {
     border-radius: 15px;
     color: white;
@@ -63,5 +65,13 @@
     &:hover,
     &:focus {
         background-color: rgba(white, 0.1);
+    }
+}
+
+.toolbar-trigger {
+    opacity: 0;
+    .toolbar-closed & {
+        z-index: 1;
+        opacity: 1;
     }
 }

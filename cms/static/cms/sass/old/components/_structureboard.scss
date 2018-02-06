@@ -34,11 +34,12 @@
 .structure {
     display: none;
     position: fixed;
-    top: 0;
+    top: 100px;
+    right: 20px;
+    height: 40vh;
     overflow: hidden;
     z-index: z(structure, base);
     width: 100%;
-    height: 100%;
     background: $structure-bgcolor;
 
     .structure-content {
@@ -345,7 +346,8 @@
         position: relative;
         border-radius: $border-radius-normal;
         cursor: move;
-        background: $white;
+        background: transparent;
+        color: white;
         @if ($structure-dragarea-use-background == 1) {
             background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAABCCAAAAAB73glBAAAAAnRSTlMAAHaTzTgAAAAeSURBVHgBY7gCBgxAAGHRRoAKYOi5dNSloy4ddSkA3VChcDH0cxcAAAAASUVORK5CYII=");
             background-repeat: no-repeat;
@@ -465,7 +467,7 @@
 }
     .structure-condensed {
         width: 416px;
-        right: 0;
+        right: 20px;
         box-shadow: 0 0 5px 0 rgba(0,0,0,.2);
         .structure-content {
             padding-left: 15px;

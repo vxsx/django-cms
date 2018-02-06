@@ -2141,7 +2141,6 @@ Plugin._highlightPluginContent = function _highlightPluginContent(
 
 Plugin._clickToHighlightHandler = function _clickToHighlightHandler(e) {
     // FIXME settings.mode is broken atm
-    return;
     if (CMS.settings.mode !== 'structure') {
         return;
     }
