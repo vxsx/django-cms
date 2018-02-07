@@ -6,8 +6,15 @@
      "
      dir="ltr" data-touch-action="none">
 
-    <div class="cms-toolbar cms-toolbar-closed">
-        <button type="button" class="cms-btn cms-btn-icon cms-btn-action cms-toolbar-trigger{% if not user.is_authenticated %} js-cms-login-trigger{% endif %}">
+    <div class="cms-toolbar
+    {% if not cms_toolbar.edit_mode_active %}
+    cms-toolbar-closed
+    {% endif %}
+    ">
+    {# href="{% firstof cms_toolbar.get_object_public_url cms_toolbar.request_path %}?preview&amp;{{ cms_toolbar.edit_mode_url_off }}" #}
+    {# href="{% firstof cms_toolbar.get_object_draft_url cms_toolbar.request_path %}?{{ cms_toolbar.edit_mode_url_on }}" #}
+        <button type="button" class="cms-btn cms-btn-icon cms-btn-action cms-toolbar-trigger {% if not user.is_authenticated %}
+            js-cms-login-trigger{% else %}js-cms-toolbar-trigger{% endif %}">
             {% include "cms/icon.html" with icon='edit' %}
         </button>
         <div class="cms-toolbar-inner">

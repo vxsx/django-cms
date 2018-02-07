@@ -11,7 +11,7 @@ export default class Toolbar {
     }
 
     events() {
-        $('.cms-toolbar-trigger').on('click', e => {
+        $('.js-cms-toolbar-trigger').on('click', e => {
             e.preventDefault();
             this.open();
         });
